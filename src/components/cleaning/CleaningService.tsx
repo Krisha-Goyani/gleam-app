@@ -47,8 +47,8 @@ const CleaningService = () => {
   };
 
   const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: 'Regular House Cleaning', href: '/cleaning' }
+    { label: 'Home', href: '#' },
+    { label: 'Deep House Cleaning', href: '#deep-cleaning' }
   ];
 
   return (

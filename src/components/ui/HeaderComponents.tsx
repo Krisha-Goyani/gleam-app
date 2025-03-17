@@ -1,54 +1,73 @@
-import React, { ReactNode } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/types/store';
+import { setLocation } from '@/store/slices/userSlice';
 
-// HeaderIcon Component
 interface HeaderIconProps {
   src: string;
   alt: string;
   badgeCount?: number;
 }
 
-export const HeaderIcon = ({ src, alt, badgeCount }: HeaderIconProps) => {
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+  isActive?: boolean;
+}
+
+export const HeaderIcon: React.FC<HeaderIconProps> = ({ src, alt, badgeCount }) => {
   return (
-    <button className="relative text-gray-700 hover:text-gray-900">
+    <a href="#" className="relative inline-block">
       <Image src={src} alt={alt} width={24} height={24} className="w-6 h-6" />
-      {badgeCount !== undefined && badgeCount > 0 && (
-        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+      {typeof badgeCount === 'number' && badgeCount > 0 && (
+        <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
           {badgeCount}
         </span>
       )}
-    </button>
+    </a>
   );
 };
 
-// LocationSelector Component
-export const LocationSelector = () => {
+export const LocationSelector: React.FC = () => {
+  const dispatch = useDispatch();
   const location = useSelector((state: RootState) => state.user.location);
 
   return (
-    <button className="flex items-center text-gray-700 hover:text-gray-900">
-      <Image src="/Image/location.png" alt="Location" width={24} height={24} className="w-6 h-6" />
-      <span className="text-sm font-circular-std font-medium ">{location}</span>
+    <button 
+      className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
+      onClick={() => dispatch(setLocation('New York'))}
+    >
+      <Image
+        src="/Image/location.png"
+        alt="Location"
+        width={24}
+        height={24}
+        className="w-6 h-6"
+      />
+      <span className="font-circular-std">{location}</span>
+      <Image
+        src="/Image/arrow-down.png"
+        alt="Select"
+        width={16}
+        height={16}
+        className="w-4 h-4"
+      />
     </button>
   );
 };
 
-// NavLink Component
-interface NavLinkProps {
-  href: string;
-  children: ReactNode;
-}
-
-export const NavLink = ({ href, children }: NavLinkProps) => {
+export const NavLink: React.FC<NavLinkProps> = ({ href, children, isActive }) => {
   return (
-    <Link 
-      href={href} 
-      className=" text-base font-normal text-black-secondary font-circular-std h-full flex items-center"
+    <a
+      href={href}
+      className={`font-circular-std text-base transition-colors ${
+        isActive
+          ? 'text-gray-900'
+          : 'text-gray-600 hover:text-gray-900'
+      }`}
     >
       {children}
-    </Link>
+    </a>
   );
 };

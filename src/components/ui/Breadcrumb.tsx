@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 
 interface BreadcrumbItem {
   label: string;
@@ -14,18 +13,20 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
     <nav className="flex items-center gap-2 font-circular-std text-sm">
       {items.map((item, index) => (
-        <React.Fragment key={item.href}>
-          {index > 0 && <span className="text-gray-400">/</span>}
-          <Link 
+        <React.Fragment key={item.label}>
+          {index > 0 && (
+            <span className="text-gray-400">/</span>
+          )}
+          <a
             href={item.href}
-            className={`${
-              index === items.length - 1 
-                ? 'text-gray-700' 
+            className={`transition-colors ${
+              index === items.length - 1
+                ? 'text-gray-700'
                 : 'text-gray-400 hover:text-gray-600'
-            } transition-colors`}
+            }`}
           >
             {item.label}
-          </Link>
+          </a>
         </React.Fragment>
       ))}
     </nav>

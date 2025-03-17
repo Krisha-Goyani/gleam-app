@@ -1,4 +1,5 @@
-import { store } from '@/store/store';
+import { configureStore } from '@reduxjs/toolkit';
+import cleaningReducer from '@/store/slices/cleaningSlice';
 
 // User State
 export interface UserState {
@@ -9,6 +10,12 @@ export interface UserState {
 }
 
 // Cleaning State
+export interface ServiceIncludes {
+  bdr: number;
+  bath: number;
+  ktchn: number;
+}
+
 export interface CleaningExtra {
   id: number;
   name: string;
@@ -22,11 +29,7 @@ export interface CleaningService {
   id: number;
   name: string;
   rating: number;
-  includes: {
-    bdr: number;
-    bath: number;
-    ktchn: number;
-  };
+  includes: ServiceIncludes;
   price: number;
   originalPrice: number;
   mainImage: string;
@@ -46,4 +49,12 @@ export interface RootState {
   cleaning: CleaningState;
 }
 
+const store = configureStore({
+  reducer: {
+    cleaning: cleaningReducer
+  }
+});
+
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

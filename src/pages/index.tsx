@@ -19,9 +19,7 @@ export default function Home() {
   return (
     <div className="">
       <Header />
-      <main>
-        <CleaningService />
-      </main>
+      <CleaningService />
     </div>
   );
 }
