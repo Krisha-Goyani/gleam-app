@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { CleaningService, CleaningExtra, CleaningState } from '@/types/store';
+import type { CleaningState } from '@/types/store';
 
 const initialState: CleaningState = {
   services: [

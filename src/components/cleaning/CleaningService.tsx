@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, CleaningExtra } from '@/types/store';
-import { selectService, updateExtra } from '@/store/slices/cleaningSlice';
+import { updateExtra } from '@/store/slices/cleaningSlice';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import {
   RatingStars,
@@ -14,12 +14,18 @@ import {
   FavoriteButton
 } from './CleaningComponents';
 
+interface ServiceIncludes {
+  bdr: number;
+  bath: number;
+  ktchn: number;
+}
+
 interface CleaningState {
   selectedService: {
     mainImage: string;
     name: string;
     rating: number;
-    includes: any;
+    includes: ServiceIncludes;
     price: number;
     originalPrice: number;
     thumbnails: string[];
@@ -67,7 +73,6 @@ const CleaningService = () => {
               images={selectedService.thumbnails}
               onSelect={setSelectedImageIndex}
               selectedIndex={selectedImageIndex}
-              className="m"
             />
           </div>
 
