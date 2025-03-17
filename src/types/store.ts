@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cleaningReducer from '@/store/slices/cleaningSlice';
+import type { ChecklistItem } from './checklist';
 
 // User State
 export interface UserState {
@@ -41,6 +42,7 @@ export interface CleaningState {
   services: CleaningService[];
   selectedService: CleaningService | null;
   selectedExtras: CleaningExtra[];
+  checklist: ChecklistItem[];
 }
 
 // Root State

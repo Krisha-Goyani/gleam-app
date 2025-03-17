@@ -1,37 +1,88 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { CleaningState } from '@/types/store';
+import type { ChecklistItem } from '@/types/checklist';
 
-const initialState: CleaningState = {
+const initialChecklist: ChecklistItem[] = [
+  // All Rooms
+  { id: 'reachable-cobwebs', title: 'Remove reachable cobwebs', isIncluded: true, section: 'all-rooms' },
+  { id: 'ac-vents', title: 'Dust ceiling fans & reachable A/C vents', isIncluded: true, section: 'all-rooms' },
+  { id: 'wall-art', title: 'Dust wall arts', isIncluded: false, section: 'all-rooms' },
+  { id: 'mirrors', title: 'Clean mirrors', isIncluded: true, section: 'all-rooms' },
+  { id: 'window-sills', title: 'Dust window sills and ledges', isIncluded: true, section: 'all-rooms' },
+  { id: 'doors', title: 'Dust doors & door frames', isIncluded: true, section: 'all-rooms' },
+  { id: 'blinds', title: 'Dust blinds', isIncluded: true, section: 'all-rooms' },
+  { id: 'baseboards', title: 'Dust baseboards', isIncluded: true, section: 'all-rooms' },
+  { id: 'furniture', title: 'Dust furniture / feather dust cluttered surfaces', isIncluded: false, section: 'all-rooms' },
+  { id: 'knick-knacks', title: 'Feather dust knick-knacks & lamps', isIncluded: false, section: 'all-rooms' },
+  { id: 'vacuum', title: 'Vacuum floors (carpet & hard surface)', isIncluded: true, section: 'all-rooms' },
+  { id: 'mop', title: 'Mop hard surface floors', isIncluded: true, section: 'all-rooms' },
+
+  // Bathrooms
+  { id: 'sanitize-toilet', title: 'Clean sanitize toilet & toilet area', isIncluded: true, section: 'bathrooms' },
+  { id: 'soap-scum', title: 'Remove soap scum & mildew in shower / tub', isIncluded: true, section: 'bathrooms' },
+  { id: 'counter-tops', title: 'Sanitize counter tops', isIncluded: true, section: 'bathrooms' },
+  { id: 'sinks-fixtures', title: 'Sanitize sinks & fixtures', isIncluded: true, section: 'bathrooms' },
+  { id: 'bath-mats', title: 'Vacuum bath mats', isIncluded: false, section: 'bathrooms' },
+  { id: 'bath-trash', title: 'Remove trash & reline trash can', isIncluded: false, section: 'bathrooms' },
+
+  // Kitchen
+  { id: 'wipe-counters', title: 'Wipe countertops', isIncluded: true, section: 'kitchen' },
+  { id: 'dust-counters', title: 'Dust counter tops item & small appliance', isIncluded: false, section: 'kitchen' },
+  { id: 'cabinet-fronts', title: 'Spot clean cabinet fronts', isIncluded: true, section: 'kitchen' },
+  { id: 'microwave', title: 'Clean microwave', isIncluded: true, section: 'kitchen' },
+  { id: 'appliances', title: 'Clean / polish appliance exteriors', isIncluded: true, section: 'kitchen' },
+  { id: 'sink-fixtures', title: 'Sanitize sink & polish fixtures', isIncluded: true, section: 'kitchen' },
+  { id: 'kitchen-trash', title: 'Remove trash and reline trash can', isIncluded: false, section: 'kitchen' },
+
+  // Bedrooms
+  { id: 'change-linens', title: 'Change linen (if fresh linen is left out)', isIncluded: false, section: 'bedrooms' },
+  { id: 'make-beds', title: 'Make beds', isIncluded: false, section: 'bedrooms' },
+  { id: 'head-boards', title: 'Polish head boards', isIncluded: false, section: 'bedrooms' },
+
+  // Extras
+  { id: 'inside-oven', title: 'Clean inside oven', isIncluded: true, section: 'extras' },
+  { id: 'inside-fridge', title: 'Clean inside fridge', isIncluded: true, section: 'extras' },
+  { id: 'cabinets-drawers', title: 'Clean inside cabinets & drawers', isIncluded: true, section: 'extras' },
+  { id: 'interior-windows', title: 'Clean interior windows', isIncluded: true, section: 'extras' },
+  { id: 'window-blinds', title: 'Clean window blinds', isIncluded: true, section: 'extras' },
+  { id: 'baseboards-extra', title: 'Clean baseboards', isIncluded: true, section: 'extras' }
+];
+
+const initialState: CleaningState & { checklist: ChecklistItem[] } = {
   services: [
     {
       id: 1,
-      name: "Deep House Cleaning",
-      rating: 4.8,
+      name: "Deep Cleaning",
+      rating: 4.0,
       includes: {
         bdr: 2,
         bath: 2,
         ktchn: 1
       },
-      price: 149.99,
-      originalPrice: 199.99,
+      price: 40.00,
+      originalPrice: 80.00,
       mainImage: "/Image/cleaning-img.png",
       thumbnails: [
         "/Image/cleaning-img.png",
-        "/Image/cleaning/thumbnails/deep-2.jpg",
-        "/Image/cleaning/thumbnails/deep-3.jpg",
-        "/Image/cleaning/thumbnails/deep-4.jpg"
+        "/Image/extra-img2.png",
+        "/Image/cleaning-img.png",
+        "/Image/cleaning-img.png",
+        "/Image/cleaning-img.png",
+        "/Image/cleaning-img.png",
+        "/Image/cleaning-img.png",
+        "/Image/cleaning-img.png"
       ],
       extras: [
         {
           id: 1,
-          name: "Extra Bathroom",
+          name: "Bathroom",
           image: "/Image/extra-img1.png",
           price: 29.99,
           originalPrice: 39.99
         },
         {
           id: 2,
-          name: "Extra Bedroom",
+          name: "Bedroom",
           image: "/Image/extra-img2.png",
           price: 34.99,
           originalPrice: 44.99
@@ -89,7 +140,8 @@ const initialState: CleaningState = {
     }
   ],
   selectedService: null,
-  selectedExtras: []
+  selectedExtras: [],
+  checklist: initialChecklist
 };
 
 const cleaningSlice = createSlice({
@@ -98,7 +150,7 @@ const cleaningSlice = createSlice({
   reducers: {
     selectService: (state, action: PayloadAction<number>) => {
       state.selectedService = state.services.find(service => service.id === action.payload) || null;
-      state.selectedExtras = []; // Reset extras when switching services
+      state.selectedExtras = [];
     },
     updateExtra: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
       const { id, quantity } = action.payload;
@@ -117,9 +169,23 @@ const cleaningSlice = createSlice({
           state.selectedExtras.push({ ...serviceExtra, quantity });
         }
       }
+    },
+    toggleChecklistItem: (state, action: PayloadAction<string>) => {
+      const item = state.checklist.find(item => item.id === action.payload);
+      if (item) {
+        item.isIncluded = !item.isIncluded;
+      }
+    },
+    updateChecklistItems: (state, action: PayloadAction<{ ids: string[]; isIncluded: boolean }>) => {
+      const { ids, isIncluded } = action.payload;
+      state.checklist.forEach(item => {
+        if (ids.includes(item.id)) {
+          item.isIncluded = isIncluded;
+        }
+      });
     }
   }
 });
 
-export const { selectService, updateExtra } = cleaningSlice.actions;
+export const { selectService, updateExtra, toggleChecklistItem, updateChecklistItems } = cleaningSlice.actions;
 export default cleaningSlice.reducer;

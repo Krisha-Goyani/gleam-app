@@ -20,9 +20,12 @@ module.exports = {
         'border-primary': '#FFF1F1',
         'border-secondary': '#bebebe',
         'border-green': '#45C917',
+        'green-primary': '#79AE48',
         'border-gray': '#D4D8EB',
         'border-gray-light': '#F1F2FB',
         'border-red': '#BF0000',
+        'blue-secondary' : '#0071B4',
+        'yellow-primary' : '#FFC107',
 
         'text-primary': '#2c2c2c',
         'black-secondary': '#373A36',
@@ -31,8 +34,10 @@ module.exports = {
         'text-green': '#45C917',
         'text-red': '#BF0000',
         'text-gray-light': '#D4D8EB',
+        'gray-light-secondary': '#4C5163',
         
         'text-black-primary': '#2C2C2C',
+        'black-secondary': '#1D1D1D',
         'text-white': '#FFFFFF',
         'text-blue': '#5D76FF',
         'text-gray-light': '#F5F5F5',
