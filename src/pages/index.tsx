@@ -4,6 +4,9 @@ import type { RootState } from '@/types/store';
 import { selectService } from '@/store/slices/cleaningSlice';
 import Header from '@/components/layout/Header';
 import CleaningService from '@/components/cleaning/CleaningService';
+import ServiceReviews from '@/components/reviews/ServiceReviews';
+import UserReviews from '@/components/reviews/UserReviews';
+import Footer from '@/components/footer/Footer';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,6 +23,9 @@ export default function Home() {
     <div className="">
       <Header />
       <CleaningService />
+      <ServiceReviews />
+      <UserReviews />
+      <Footer />
     </div>
   );
 }

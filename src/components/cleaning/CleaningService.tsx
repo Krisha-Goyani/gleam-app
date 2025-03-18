@@ -5,6 +5,7 @@ import type { RootState, CleaningExtra } from '@/types/store';
 import { updateExtra } from '@/store/slices/cleaningSlice';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import ServiceChecklist from '../ui/ServiceChecklist';
+import ServiceReviews from '../reviews/ServiceReviews';
 
 // Component Interfaces
 interface ServiceIncludes {
@@ -344,8 +345,6 @@ const CleaningService = () => {
               </div>
             </div>
 
-            {/* Extras Section */}
-           
           </div>
         </div>
       </div>
