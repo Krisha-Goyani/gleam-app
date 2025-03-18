@@ -5,9 +5,9 @@ const Footer = () => {
   const [emailAddress, setEmailAddress] = useState("");
 
   return (
-    <footer className="bg-blue-secondary px-16 text-white">
+    <footer className="bg-blue-secondary px-4 md:px-16 text-white">
       {/* Desktop View */}
-      <div className="hidden md:block container mx-auto pt-16 py-8">
+      <div className="hidden md-lg:block container mx-auto pt-16 py-8">
         <div className="flex justify-between">
           <div className="flex gap-16">
             {/* Column 1 - About Us */}
@@ -164,7 +164,7 @@ const Footer = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden px-6 py-8">
+      <div className="md-lg:hidden py-8">
         <div className="space-y-6">
           {/* About Us Section */}
           <div>
@@ -225,75 +225,75 @@ const Footer = () => {
           <div className="flex gap-4">
             <a href="#">
               <Image
-                src="/instagram-icon.svg"
+                src="/Image/insta.png"
                 alt="Instagram"
                 width={24}
                 height={24}
-                className="h-6 w-6"
+                className="h-4 w-4"
               />
             </a>
             <a href="#">
               <Image
-                src="/linkedin-icon.svg"
+                src="/Image/ln.png"
                 alt="LinkedIn"
                 width={24}
                 height={24}
-                className="h-6 w-6"
+                className="h-4 w-4"
               />
             </a>
           </div>
 
           {/* Payment Methods */}
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <Image
-              src="/mastercard-icon.svg"
+              src="/Image/mastercard.png"
               alt="Mastercard"
-              width={32}
-              height={32}
-              className="h-8"
+              width={56}
+              height={35}
+              className="h-9"
             />
             <Image
-              src="/paypal-icon.svg"
+              src="/Image/payPal.png"
               alt="PayPal"
-              width={32}
-              height={32}
-              className="h-8"
+              width={56}
+              height={35}
+              className="h-9"
             />
             <Image
-              src="/amex-icon.svg"
+              src="/Image/amex.png"
               alt="American Express"
-              width={32}
-              height={32}
-              className="h-8"
+              width={56}
+              height={35}
+              className="h-9"
             />
             <Image
-              src="/applepay-icon.svg"
+              src="/Image/applePay.png"
               alt="Apple Pay"
-              width={32}
-              height={32}
-              className="h-8"
+              width={56}
+              height={35}
+              className="h-9"
             />
             <Image
-              src="/gpay-icon.svg"
+              src="/Image/pay.png"
               alt="Google Pay"
-              width={32}
-              height={32}
-              className="h-8"
+              width={56}
+              height={35}
+              className="h-9"
             />
           </div>
 
           {/* Newsletter Signup */}
           <div>
             <h3 className="text-sm mb-2">Sign up to our newsletter</h3>
-            <div className="flex gap-2">
+            <div className="flex gap-2 max-w-md">
               <input
                 type="email"
                 placeholder="Email address"
-                className="flex-1 px-4 py-2 rounded text-gray-800"
+                className="w-56 h-11 flex-1 px-4 py-2 rounded text-gray-800"
                 value={emailAddress}
                 onChange={(e) => setEmailAddress(e.target.value)}
               />
-              <button className="bg-green-500 px-6 py-2 rounded hover:bg-green-600">
+              <button className=" w-24 h-11 bg-green-primary py-2 rounded hover:bg-green-600">
                 Sign up
               </button>
             </div>
@@ -305,12 +305,20 @@ const Footer = () => {
             <p className="text-sm mb-3">
               Reliable at-home services for all your constructional needs
             </p>
-            <div className="space-y-2">
-              <button className="w-full bg-green-500 px-6 py-2 rounded hover:bg-green-600">
+
+            <div className="flex gap-3 max-w-[992px]">
+              <button className="w-36 h-11 bg-green-primary px-6 py-2 rounded hover:bg-green-600">
                 Contact us
               </button>
-              <button className="w-full border border-white px-6 py-2 rounded hover:bg-blue-700">
-                +34 638 11 53 14
+              <button className="w-44 h-11 border border-white py-2 rounded hover:bg-blue-700 flex items-center justify-center gap-1">
+                <Image 
+                  src="/Image/whatsapp.png" 
+                  alt="WhatsApp" 
+                  height={16} 
+                  width={16}
+                  className="w-4 h-4"
+                /> 
+                <span className=" text-lg">+34 638 11 53 14</span>
               </button>
             </div>
           </div>

@@ -13,7 +13,7 @@ const ServiceReviews = () => {
       <h2 className="text-lg font-bold text-black-secondary  mb-8">
         Service Reviews
       </h2>
-      <div className="flex flex-col md:flex-row gap-20">
+      <div className="flex flex-col md-lg:flex-row gap-20">
         {/* Left section - Rating distribution */}
         <div className="flex gap-9">
           <div className="flex flex-col items-center gap-3 w-24">
@@ -41,7 +41,7 @@ const ServiceReviews = () => {
         </div>
 
         {/* Right section - Service metrics */}
-        <div className="xs:hidden md:block md:w-[751px]">
+        <div className="xs:hidden md-lg:block md-lg:w-[751px]">
           <div className="flex flex-col md:flex-row justify-between">
             <MetricCircle
               value={reviews.serviceMetrics.quality}
@@ -65,8 +65,8 @@ const ServiceReviews = () => {
             />
           </div>
         </div>
-        <div className="md:hidden w-[300px] md:w-[751px]">
-          <div className="flex flex-col md:flex-row ">
+        <div className="md-lg:hidden w-[300px] md-lg:w-[751px]">
+          <div className="flex flex-col md-lg:flex-row ">
             <div className="flex max-w-[722px] w-full justify-between ">
               <MetricCircle
                 value={reviews.serviceMetrics.quality}
@@ -81,7 +81,7 @@ const ServiceReviews = () => {
                 label="Cleanliness"
               />
             </div>
-            <div className=" flex max-w-[722px] w-full justify-evenly md:justify-between">
+            <div className=" flex max-w-[722px] w-full justify-evenly ">
               <MetricCircle
                 value={reviews.serviceMetrics.onTime}
                 label="On time"

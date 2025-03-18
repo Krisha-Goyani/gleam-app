@@ -13,15 +13,15 @@ const Header = () => {
     <header className="border-b border-gray-200">
       <div className="container-main">
         {/* Top Row */}
-        <div className="px-16">
+        <div className="px-4 md:px-16">
           <div className="flex items-center justify-between pt-4 pb-2">
             {/* Left - Location */}
-            <div className="w-1/3">
+            <div className="hidden md:block w-1/3">
               <LocationSelector />
             </div>
 
             {/* Center - Logo */}
-            <div className="w-1/3 flex justify-center">
+            <div className="w-1/3 flex md:justify-center">
               <a href="#" className="flex-shrink-0">
                 <Image
                   src="/Image/logo.png"
@@ -35,6 +35,7 @@ const Header = () => {
             </div>
 
             {/* Right - Icons */}
+            <div className="hidden md:block">
             <div className="w-1/3 flex items-center justify-end gap-11">
               <HeaderIcon src="/Image/search.png" alt="Search" />
               <HeaderIcon
@@ -54,11 +55,15 @@ const Header = () => {
               />
               <HeaderIcon src="/Image/profile.png" alt="Profile" />
             </div>
+            </div>
+            <div className="md:hidden">
+              <Image src="/Image/menu.png" alt="Menu" width={20} height={20} />
+            </div>
           </div>
         </div>
 
         {/* Bottom Row - Navigation */}
-        <div className="px-16">
+        <div className="hidden md:block px-4 md:px-16">
           <nav className="flex  justify-center justify-self-center gap-10 pb-7">
             <NavLink href="#">Cleaning Services</NavLink>
             <NavLink href="#">Cleaning Tips</NavLink>

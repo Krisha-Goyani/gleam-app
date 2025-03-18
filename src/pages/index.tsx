@@ -23,7 +23,7 @@ export default function Home() {
     <div className="conatiner-main">
       <Header />
       <CleaningService />
-      <div className="px-16 container-main">
+      <div className="px-4 md:px-16 container-main">
         <ServiceReviews />
         <UserReviews />
       </div>

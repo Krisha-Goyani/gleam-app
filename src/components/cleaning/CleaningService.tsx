@@ -221,21 +221,17 @@ const ExtraItem = ({
   );
 };
 
-const ThumbnailGallery = ({ 
-  images, 
-  onSelect, 
-  selectedIndex 
-}: { 
+const ThumbnailGallery = ({ images, onSelect, selectedIndex }: { 
   images: string[]; 
   onSelect: (index: number) => void; 
   selectedIndex: number 
 }) => (
-  <div className="mt-4 overflow-x-auto scrollbar-hide" style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
-    <div className="flex gap-4 max-w-[500px] xl:max-w-[635px]">
+  <div className="mt-4 w-full overflow-x-auto scrollbar-hide" style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
+    <div className="flex gap-4 min-w-max">
       {images.map((image, index) => (
         <button
           key={index}
-          className={`relative w-[140px] h-[87px] border-2 rounded overflow-hidden ${
+          className={`shrink-0 relative w-[140px] h-[87px] border-2 rounded overflow-hidden ${
             selectedIndex === index ? "border-green-500" : "border-transparent"
           }`}
           onClick={() => onSelect(index)}
@@ -244,7 +240,7 @@ const ThumbnailGallery = ({
             src={image}
             alt={`Thumbnail ${index + 1}`}
             fill
-            className={`object-cover w-[140px] h-[87px] transition-all duration-200 ${
+            className={`object-cover transition-all duration-200 ${
               selectedIndex !== index ? "blur-[2px] brightness-75" : ""
             }`}
           />
@@ -274,19 +270,19 @@ const CleaningService = () => {
 
   return (
     <div className="container-main">
-      <div className="px-16 py-4">
+      <div className="px-4 md:px-16 py-4">
         <Breadcrumb items={breadcrumbItems} />
       </div>
-      <div className="px-16 py-8 container-main">
-        <div className="md:flex">
+      <div className="px-4 md:px-16 py-8 container-main">
+        <div className="md-lg:flex space-between gap-10 max-w-[1310px] w-full">
           {/* Left side - Images */}
-          <div className="max-w-[500px] xl:max-w-[635px]">
-            <div className="relative max-w-[500px] xl:max-w-[635px] h-[394px]">
+          <div className="md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px]">
+            <div className="relative md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px] h-[394px]">
               <Image
                 src={selectedService.mainImage}
                 alt={selectedService.name}
                 fill
-                className="object-cover max-w-[500px] xl:max-w-[635px] h-[394px]"
+                className="object-cover md-lg:max-w-[450px]  lg-sm:max-w-[500px]  xl:max-w-[635px] h-[394px]"
                 priority
               />
             </div>
@@ -298,7 +294,7 @@ const CleaningService = () => {
           </div>
 
           {/* Right side - Details */}
-          <div className="pl-10 flex-1 max-w-[635px]">
+          <div className=" flex-1 md-lg:max-w-[400px] lg-xs:max-w-[490px] lg-sm:max-w-[500px] xl:max-w-[635px]">
             <div className="flex items-start justify-between">
               <div>
                 <h1 className="text-3xl font-circular-std mb-1">{selectedService.name}</h1>
@@ -312,7 +308,7 @@ const CleaningService = () => {
 
             <ServiceIncludes {...selectedService.includes} />
             {/* Price and Add to Cart */}
-            <div className="mt-12 w-[477px]">
+            <div className="mt-12 md-lg:w-[400px] lg-sm:w-[477px]">
               <h3 className="text-base font-circular-std mb-3 font bold">
                 Extras <span className="text-sm text-black-secondary ">(Select as needed)</span>
               </h3>
@@ -332,7 +328,7 @@ const CleaningService = () => {
                 <span className="text-2xl font-semibold text-gray-900">€{selectedService?.price.toFixed(2)}</span>
                 <span className="text-lg text-gray-500 line-through">€{selectedService?.originalPrice.toFixed(2)}</span>
               </div>
-              <button className="bg-green-primary text-white py-3 rounded-lg font-circular-std hover:bg-green-600 transition-colors w-[477px]">
+              <button className="bg-green-primary text-white py-3 rounded-lg font-circular-std hover:bg-green-600 transition-colors max-w-[477px] xl:w-[477px] md:w-[400px]">
                 Add to cart
               </button>
             </div>
@@ -340,7 +336,7 @@ const CleaningService = () => {
             {/* Included & Excluded Section */}
             <div className="mt-8">
               <h2 className="text-xl font-semibold mb-4">Included & Excluded</h2>
-              <div className="w-[477px] border border-gray-100 rounded-lg px-6">
+              <div className="md:w-[400px] md-lg:w-[430px] lg:w-[450px] lg-sm:w-[477px] pr-6">
                 <ServiceChecklist />
               </div>
             </div>
