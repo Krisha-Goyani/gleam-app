@@ -1,35 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface Review {
-  id: string;
-  rating: number;
-  title: string;
-  description: string;
-  author: string;
-  timeAgo: string;
-  likes: number;
-  dislikes: number;
-  images?: string[];
-}
-
-interface ReviewsState {
-  averageRating: number;
-  totalRatings: number;
-  totalReviews: number;
-  ratingDistribution: Review[];
-  serviceMetrics: {
-    quality: number;
-    onTime: number;
-    cleanliness: number;
-  };
-  userReviews: Review[];
-  displayedReviews: number;
-}
+import { createSlice } from '@reduxjs/toolkit';
+import type { ReviewsState } from '@/types/types';
 
 const initialState: ReviewsState = {
   averageRating: 4.0,
-  totalRatings: 15000,
-  totalReviews: 5023,
+  totalRatings: 19000,
+  totalReviews: 503,
   ratingDistribution: [
     { rating: 5, count: 4913 },
     { rating: 4, count: 2290 },
@@ -52,7 +27,7 @@ const initialState: ReviewsState = {
       timeAgo: '10h ago',
       likes: 5,
       dislikes: 0,
-      images: ['/image1.jpg', '/image2.jpg', '/image3.jpg']
+      images: ['/Image/review-img.png', '/Image/review-img.png', '/Image/review-img.png']
     },
     {
       id: '2',
@@ -111,4 +86,4 @@ const reviewsSlice = createSlice({
   }
 });
 
-export default reviewsSlice.reducer; 
+export default reviewsSlice.reducer;

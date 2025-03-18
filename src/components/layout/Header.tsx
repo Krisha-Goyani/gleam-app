@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import type { RootState } from "@/types/store";
+import type { RootState } from "@/types/types";
 import { HeaderIcon, LocationSelector, NavLink } from "../ui/HeaderComponents";
 
 const Header = () => {

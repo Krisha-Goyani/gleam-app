@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
+import type { RootState } from '@/types/types';
 import ReviewCard from './ReviewCard';
 
 const UserReviews = () => {
@@ -19,20 +19,24 @@ const UserReviews = () => {
   };
 
   return (
-    <div className="bg-white p-6">
-      <h2 className="text-lg font-medium text-gray-900 mb-4">Most Useful Reviews</h2>
+    <div className="bg-white pt-12">
+      <h2 className="text-lg font-medium text-gray-900 ">Most Useful Reviews</h2>
       
       <div className="divide-y divide-gray-200">
-        {visibleReviews.map((review) => (
-          <ReviewCard key={review.id} review={review} />
+        {visibleReviews.map((review, index) => (
+          <ReviewCard 
+            key={review.id} 
+            review={review} 
+            isLast={index === visibleReviews.length - 1}
+          />
         ))}
       </div>
       
-      <div className="mt-4">
+      <div className="mt-4 mb-10">
         {hasMoreReviews && (
           <button
             onClick={handleShowMore}
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+            className="text-blue-primary hover:text-blue-700 text-base font-circular-std font-normal"
           >
             Show more reviews
           </button>
@@ -40,7 +44,7 @@ const UserReviews = () => {
         {isExpanded && !hasMoreReviews && (
           <button
             onClick={handleShowLess}
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+            className="text-blue-primary hover:text-blue-700 text-base font-circular-std font-normal"
           >
             Show less reviews
           </button>
@@ -50,4 +54,4 @@ const UserReviews = () => {
   );
 };
 
-export default UserReviews; 
+export default UserReviews;

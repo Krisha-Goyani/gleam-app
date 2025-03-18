@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { CleaningState } from '@/types/store';
+import type { CleaningState } from '@/types/types';
 import type { ChecklistItem } from '@/types/checklist';
 
 const initialChecklist: ChecklistItem[] = [

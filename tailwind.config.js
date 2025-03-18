@@ -9,6 +9,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'xs': '360px',
+      'sm': '640px',
+      'md': '768px',
+      'md-lg': '992px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+      'custom': '1400px'
+    },
     extend: {
       fontFamily: {
         // 'oswald': ['Oswald'],
@@ -25,7 +35,10 @@ module.exports = {
         'border-gray-light': '#F1F2FB',
         'border-red': '#BF0000',
         'blue-secondary' : '#0071B4',
+        'blue-primary' : '#517EE5',
         'yellow-primary' : '#FFC107',
+        'yellow-secondary' : '#FFE815',
+        'gray-light-secondary': '#F0ECE7',
 
         'text-primary': '#2c2c2c',
         'black-secondary': '#373A36',

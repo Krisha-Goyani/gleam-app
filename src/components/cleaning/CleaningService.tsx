@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, CleaningExtra } from '@/types/store';
+import type { RootState, CleaningExtra } from '@/types/redux';
 import { updateExtra } from '@/store/slices/cleaningSlice';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import ServiceChecklist from '../ui/ServiceChecklist';
-import ServiceReviews from '../reviews/ServiceReviews';
+// import ServiceReviews from '../reviews/ServiceReviews';
 
 // Component Interfaces
 interface ServiceIncludes {
@@ -231,7 +231,7 @@ const ThumbnailGallery = ({
   selectedIndex: number 
 }) => (
   <div className="mt-4 overflow-x-auto scrollbar-hide" style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
-    <div className="flex gap-4 min-w-max">
+    <div className="flex gap-4 max-w-[500px] xl:max-w-[635px]">
       {images.map((image, index) => (
         <button
           key={index}
@@ -244,7 +244,7 @@ const ThumbnailGallery = ({
             src={image}
             alt={`Thumbnail ${index + 1}`}
             fill
-            className={`object-cover transition-all duration-200 ${
+            className={`object-cover w-[140px] h-[87px] transition-all duration-200 ${
               selectedIndex !== index ? "blur-[2px] brightness-75" : ""
             }`}
           />
@@ -277,16 +277,16 @@ const CleaningService = () => {
       <div className="px-16 py-4">
         <Breadcrumb items={breadcrumbItems} />
       </div>
-      <div className="px-16 py-8">
-        <div className="flex">
+      <div className="px-16 py-8 container-main">
+        <div className="md:flex">
           {/* Left side - Images */}
-          <div className="w-[635px]">
-            <div className="relative w-[635px] h-[394px]">
+          <div className="max-w-[500px] xl:max-w-[635px]">
+            <div className="relative max-w-[500px] xl:max-w-[635px] h-[394px]">
               <Image
                 src={selectedService.mainImage}
                 alt={selectedService.name}
                 fill
-                className="object-cover w-[635px] h-[394px]"
+                className="object-cover max-w-[500px] xl:max-w-[635px] h-[394px]"
                 priority
               />
             </div>
@@ -298,7 +298,7 @@ const CleaningService = () => {
           </div>
 
           {/* Right side - Details */}
-          <div className="pl-10 flex-1">
+          <div className="pl-10 flex-1 max-w-[635px]">
             <div className="flex items-start justify-between">
               <div>
                 <h1 className="text-3xl font-circular-std mb-1">{selectedService.name}</h1>

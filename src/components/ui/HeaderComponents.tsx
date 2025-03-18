@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '@/types/store';
+import type { RootState } from '@/types/types';
 import { setLocation } from '@/store/slices/userSlice';
 
 interface HeaderIconProps {

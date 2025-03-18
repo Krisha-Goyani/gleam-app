@@ -1,5 +1,3 @@
-import { configureStore } from '@reduxjs/toolkit';
-import cleaningReducer from '@/store/slices/cleaningSlice';
 import type { ChecklistItem } from './checklist';
 
 // User State
@@ -45,18 +43,47 @@ export interface CleaningState {
   checklist: ChecklistItem[];
 }
 
+// Make RatingDistribution exportable
+export interface RatingDistribution {
+  rating: number;
+  count: number;
+}
+
+interface ServiceMetrics {
+  quality: number;
+  onTime: number;
+  cleanliness: number;
+}
+
+export interface ReviewsState {
+  averageRating: number;
+  totalRatings: number;
+  totalReviews: number;
+  ratingDistribution: RatingDistribution[];  // Now using exported interface
+  serviceMetrics: ServiceMetrics;
+  userReviews: Review[];        // Add userReviews array
+  displayedReviews: number;     // Add displayedReviews counter
+}
+
 // Root State
 export interface RootState {
   user: UserState;
   cleaning: CleaningState;
+  reviews: ReviewsState;  // Add reviews to RootState
 }
 
-const store = configureStore({
-  reducer: {
-    cleaning: cleaningReducer
-  }
-});
+// Import dispatch type from the store
+export type { AppDispatch } from '@/store/store';
 
-export type AppDispatch = typeof store.dispatch;
 
-export default store;
+export interface Review {
+  id: string;
+  rating: number;
+  title: string;
+  description: string;
+  author: string;     // Keep using author instead of userName
+  timeAgo: string;
+  likes: number;
+  dislikes: number;
+  images?: string[];
+}
