@@ -13,24 +13,25 @@ const CleaningPage = () => {
     <>
       <Head>
         <title>{selectedService.name} | Gleam Cleaning Services</title>
-        <meta name="description" content={`Professional ${selectedService.name} service including ${selectedService.includes.bdr} bedrooms, ${selectedService.includes.bath} bathrooms, and ${selectedService.includes.ktchn} kitchen`} />
+        <meta name="description" content="Professional cleaning services for your home and office. We deliver exceptional cleanliness with eco-friendly solutions and trained professionals." />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={`${selectedService.name} | Gleam Cleaning Services`} />
-        <meta property="og:description" content={`Professional ${selectedService.name} service including ${selectedService.includes.bdr} bedrooms, ${selectedService.includes.bath} bathrooms, and ${selectedService.includes.ktchn} kitchen`} />
-        <meta property="og:image" content={selectedService.mainImage} />
+        <meta property="og:site_name" content="Gleam Cleaning Services" />
+        <meta property="og:title" content="Professional Cleaning Services | Gleam Cleaning" />
+        <meta property="og:description" content="Transform your space with our professional cleaning services. Expert cleaners, eco-friendly products, and guaranteed satisfaction for homes and offices." />
+        <meta property="og:image" content="https://gleam-app.netlify.app/Image/og-img.png" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${selectedService.name} | Gleam Cleaning Services`} />
-        <meta name="twitter:description" content={`Professional ${selectedService.name} service including ${selectedService.includes.bdr} bedrooms, ${selectedService.includes.bath} bathrooms, and ${selectedService.includes.ktchn} kitchen`} />
-        <meta name="twitter:image" content={selectedService.mainImage} />
+        <meta name="twitter:title" content="Professional Cleaning Services | Gleam Cleaning" />
+        <meta name="twitter:description" content="Transform your space with our professional cleaning services. Expert cleaners, eco-friendly products, and guaranteed satisfaction for homes and offices." />
+        <meta name="twitter:image" content="https://gleam-app.netlify.app/Image/og-img.png" />
         
         {/* Additional SEO tags */}
-        <meta name="keywords" content="cleaning service, house cleaning, professional cleaning, deep cleaning, home service" />
+        <meta name="keywords" content="house cleaning, office cleaning, professional cleaners, eco-friendly cleaning, deep cleaning, residential cleaning, commercial cleaning, cleaning services" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://gleam-app.netlify.app/${selectedService.name.toLowerCase().replace(/\s+/g, '-')}`} />
+        <link rel="canonical" href="https://gleam-app.netlify.app/cleaning" />
       </Head>
       <CleaningService />
     </>
