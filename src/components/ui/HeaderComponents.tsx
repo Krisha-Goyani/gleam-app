@@ -8,6 +8,7 @@ interface HeaderIconProps {
   src: string;
   alt: string;
   badgeCount?: number;
+  onClick?: () => void;
 }
 
 interface NavLinkProps {
@@ -16,16 +17,19 @@ interface NavLinkProps {
   isActive?: boolean;
 }
 
-export const HeaderIcon: React.FC<HeaderIconProps> = ({ src, alt, badgeCount }) => {
+export const HeaderIcon: React.FC<HeaderIconProps> = ({ src, alt, badgeCount, onClick }: HeaderIconProps) => {
   return (
-    <a href="#" className="relative inline-block">
+    <button 
+      onClick={onClick} 
+      className="relative inline-block"
+    >
       <Image src={src} alt={alt} width={24} height={24} className="w-6 h-6" />
       {typeof badgeCount === 'number' && badgeCount > 0 && (
         <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
           {badgeCount}
         </span>
       )}
-    </a>
+    </button>
   );
 };
 

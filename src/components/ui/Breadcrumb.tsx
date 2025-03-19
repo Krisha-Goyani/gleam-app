@@ -11,7 +11,7 @@ interface BreadcrumbProps {
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
-    <nav className="flex items-center gap-2 font-circular-std text-sm">
+    <nav className="hidden md-lg:flex items-center gap-2 font-circular-std text-sm">
       {items.map((item, index) => (
         <React.Fragment key={item.label}>
           {index > 0 && (

@@ -77,22 +77,22 @@ const initialState: CleaningState & { checklist: ChecklistItem[] } = {
           id: 1,
           name: "Bathroom",
           image: "/Image/extra-img1.png",
-          price: 29.99,
-          originalPrice: 39.99
+          price: 40.99,
+          originalPrice: 80.00
         },
         {
           id: 2,
           name: "Bedroom",
           image: "/Image/extra-img2.png",
-          price: 34.99,
-          originalPrice: 44.99
+          price: 40.99,
+          originalPrice: 80.00
         },
         {
           id: 3,
           name: "Hand Wash Dishes",
           image: "/Image/extra-img3.png",
-          price: 19.99,
-          originalPrice: 24.99
+          price: 40.99,
+          originalPrice: 80.00
         }
       ]
     },
