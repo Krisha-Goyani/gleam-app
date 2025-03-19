@@ -47,19 +47,19 @@ const RatingStars = ({ rating }: { rating: number }) => (
 
 const ServiceIncludes = ({ bdr, bath, ktchn }: ServiceIncludes) => (
   <div className="flex items-center gap-4 text-sm font-circular-std text-gray-light-secondary md-lg:mt-2">
-    <span className="font-circular-std">Includes : </span>
-    <div className="flex items-center gap-2">
-      <span className="font-circular-std flex items-center gap-1">
+    <span className="font-circular-std text-gray-light-primary">Includes : </span>
+    <div className="flex items-center gap-2 text-gray-light-primary">
+      <span className="font-circular-std flex items-center gap-1 text-gray-light-primary">
         <Image src="/Image/bed.png" alt="Bedroom" width={16} height={16} />
         {bdr} bdr
       </span>
       <span className="font-circular-std">•</span>
-      <span className="font-circular-std flex items-center gap-1">
+      <span className="font-circular-std flex items-center gap-1 text-gray-light-primary">
         <Image src="/Image/bath.png" alt="Bathroom" width={16} height={16} />
         {bath} bath
       </span>
       <span className="font-circular-std">•</span>
-      <span className="font-circular-std flex items-center gap-1">
+      <span className="font-circular-std flex items-center gap-1 text-gray-light-primary">
         <Image src="/Image/kitchen.png" alt="Kitchen" width={16} height={16} />
         {ktchn} ktchn
       </span>
@@ -88,7 +88,7 @@ const Price = ({
       <span
         className={`${
           size === "large" ? "text-lg" : "text-sm"
-        } text-gray-light-secondary line-through font-circular-std`}
+        } text-gray-light-primary line-through font-circular-std`}
       >
         € {originalPrice.toFixed(2)}
       </span>
