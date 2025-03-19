@@ -201,9 +201,26 @@ const ExtraItem = ({
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="px-4 py-2 rounded-lg text-sm bg-green-50 text-green-600 border border-green-100 hover:border-green-500 transition-colors font-circular-std min-w-[100px] text-center"
+          className="h-8 w-20 px-2 hover:border-green-300 transition-colors min-w-[100px] text-center flex items-center justify-between gap-2
+          bg-green-light text-black-primary font-circular-std border border-green-primary rounded-lg text-sm relative"
         >
-          {quantity || 1.5}
+          <span>{quantity || 1.5}</span>
+          <div className="flex items-center gap-1">
+            <Image 
+              src="/Image/arrow-down.png" 
+              alt="arrow" 
+              width={16} 
+              height={16} 
+              className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </div>
+          <Image 
+            src="/Image/cross-icon.png"
+            alt="cross"
+            width={16}
+            height={16}
+            className="absolute -top-2 -right-2"
+          />
         </button>
         {isOpen && (
           <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10">
@@ -343,7 +360,10 @@ const CleaningService: React.FC = () => {
                   />
                 </button>
                 <div className="flex gap-4">
-                  <button className="p-2">
+                  <button 
+                    className="p-2"
+                    onClick={() => setIsCartOpen(true)}
+                  >
                     <Image
                       src="/Image/shopping-cart.png"
                       alt="Cart"

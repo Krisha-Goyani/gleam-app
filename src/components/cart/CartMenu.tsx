@@ -33,16 +33,10 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
         onClick={onClose}
       />
 
-      <div className="fixed right-0 top-0 h-full w-full max-w-[606px] bg-white shadow-xl transform transition-transform">
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <h2 className="text-xl font-circular-std text-gray-light-primary">
-              Cart
-            </h2>
-          </div>
-
+      <div className="fixed right-0 top-0 h-full w-full xs:max-w-[330px] xs-md:max-w-[400px] md:max-w-[606px] bg-white shadow-xl transform transition-transform">
+        <div className="flex flex-col h-full">        
           <div className="flex-1 overflow-y-auto">
-            <div className="px-5 pt-5 border-b-8 border-gray-light-secondary">
+            <div className="px-2 xs-md:px-5 pt-5 border-b-8 border-gray-light-secondary">
               <ServiceItem
                 name="Regular House Cleaning"
                 rating={4.0}
@@ -114,9 +108,9 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
             <PriceDetails subTotal={220.0} visitFee={5.0} />
           </div>
 
-          <div className="flex justify-between px-5 py-4 mt-2 bg-white">
+          <div className="flex justify-between px-2 xs-md:px-5 py-4 mt-2 bg-white">
             <div className="flex justify-between items-center mb-3">
-              <div className="flex w-56 flex-col text-black-secondary">
+              <div className="flex w-32 md:w-56 flex-col text-black-secondary">
                 <span className="text-xl text-black-secondary font-circular-std">
                   € 225.00
                 </span>
@@ -125,7 +119,7 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
                 </span>
               </div>
             </div>
-            <button className="w-80 h-14 bg-green-primary text-white py-4 px-11 rounded-lg font-circular-std hover:bg-green-600 transition-colors relative">
+            <button className="w-52 md:w-80 h-14 bg-green-primary text-white md:py-4 md:px-11 rounded-lg font-circular-std hover:bg-green-600 transition-colors relative">
               Confirm & Add Address
             </button>
           </div>

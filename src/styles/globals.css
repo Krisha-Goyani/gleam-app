@@ -39,8 +39,43 @@ body {
 }
 .container-main{
   max-width: 1440px;
-  background-color: rgb(192, 170, 170);
+  /* background-color: rgb(192, 170, 170); */
   margin: 0 auto;
+}
+
+/* Close button styles */
+.close-button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.close-button::before,
+.close-button::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  background-color: #666;
+  transform-origin: center;
+}
+
+.close-button::before {
+  transform: rotate(45deg);
+}
+
+.close-button::after {
+  transform: rotate(-45deg);
 }
 
 @font-face {

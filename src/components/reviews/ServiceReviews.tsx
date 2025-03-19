@@ -9,14 +9,14 @@ const ServiceReviews = () => {
 
   return (
     <div className="bg-white">
-      <div className="h-2 bg-red-200 mt-2 mb-10"> </div>
+      <div className="h-2 bg-gray-light-secondary mt-2 mb-10"> </div>
       <h2 className="text-lg font-bold text-black-secondary  mb-8">
         Service Reviews
       </h2>
       <div className="flex flex-col md-lg:flex-row gap-20">
         {/* Left section - Rating distribution */}
         <div className="flex gap-9">
-          <div className="flex flex-col items-center gap-3 w-24">
+          <div className="flex flex-col md-lg:items-center gap-3 w-44 md-lg:w-24">
             <span className="text-2xl text-black-secondary font-bold ">
               {reviews.averageRating.toFixed(1)}
             </span>
@@ -28,7 +28,7 @@ const ServiceReviews = () => {
             </span>
           </div>
 
-          <div className="w-64">
+          <div className="w-80 md-lg:w-64">
             {reviews.ratingDistribution.map((item) => (
               <RatingBar
                 key={item.rating}
@@ -66,7 +66,7 @@ const ServiceReviews = () => {
           </div>
         </div>
         <div className="md-lg:hidden w-[300px] md-lg:w-[751px]">
-          <div className="flex flex-col md-lg:flex-row ">
+          <div className=" flex flex-col xs-md:flex-row xs-md:w-[400px] sm:w-[600px] md:w-[700px]">
             <div className="flex max-w-[722px] w-full justify-between ">
               <MetricCircle
                 value={reviews.serviceMetrics.quality}

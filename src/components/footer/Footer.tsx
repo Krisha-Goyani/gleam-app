@@ -5,7 +5,7 @@ const Footer = () => {
   const [emailAddress, setEmailAddress] = useState("");
 
   return (
-    <footer className="bg-blue-secondary px-4 md:px-16 text-white">
+    <footer className="bg-blue-secondary px-4 sm:px-6 md:px-8 md-lg:px-16 text-white">
       {/* Desktop View */}
       <div className="hidden md-lg:block container mx-auto pt-16 py-8">
         <div className="flex justify-between">

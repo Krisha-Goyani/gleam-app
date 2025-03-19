@@ -48,73 +48,90 @@ export interface ServiceItemProps {
 }
 
 // Update the ServiceItem component's rooms rendering
+// Update the ServiceItem component
 export const ServiceItem = ({
   name,
-  image,  // Add this prop
+  image,
   rating,
   rooms,
   items,
+  isSticky = false,
+  onDelete,
 }: ServiceItemProps) => (
-  <div className="mb-6">
-    <div>   
-    <div className="flex justify-between mb-4">
-      <div className="flex gap-4">
-        <Image
-          src={image}
-          alt={name}
-          width={129}
-          height={80}
-          className=""
-        />
-        <div className="flex flex-col w-[470px]">
-        <div className="flex justify-between w-full">
-          <h3 className="font-circular-std font-bold text-lg mb-1 text-gray-light-primary">
-            {name}
-          </h3>
-            <Image
-              src="/Image/delete.png"
-              alt="Delete"
-              width={20}
-              height={20}
-              className="h-5 w-5 cursor-pointer self-center"
-            />
+  <div className="relative">
+    <div
+      className={`${
+        isSticky
+          ? "fixed top-0 left-0 right-0 bg-white z-10 px-2 xs-md:px-5 max-w-[606px]"
+          : ""
+      }`}
+    >
+      {isSticky && (
+        <div className="flex mb-2 items-center justify-between p-4">
+          <h2 className="text-xl font-circular-std text-gray-light-primary">
+            Cart
+          </h2>
         </div>
-        <div className="flex justify-between w-full">
-
-        <div className="flex items-center gap-2 text-base text-gray-light-primary font-circular-std">
-          <span className="text-yellow-primary">★</span>
-          <span>{rating}</span>
-          {rooms.map((room, index) => (
-            <React.Fragment key={index}>
-              <span>•</span>
-              <div className="flex items-center gap-1 font-circular-std">
-                <Image 
-                  src={room.icon}
-                  alt={room.name}
-                  width={16}
-                  height={16}
-                />
-                <span>{room.name}</span>
+      )}
+      <div className="flex justify-between mb-3">
+        <div className="flex gap-4">
+          <Image src={image} alt={name} width={100} height={50} className="w-20 md:w-32 h-20" />
+          <div className="flex flex-col w-[300px] md:w-[470px]">
+            <div className="flex justify-between w-full">
+              <h3 className="font-circular-std font-bold text-lg mb-1 text-gray-light-primary">
+                {name}
+              </h3>
+              <Image
+                src="/Image/delete.png"
+                alt="Delete"
+                width={20}
+                height={20}
+                className="h-5 w-5 cursor-pointer self-center"
+                onClick={onDelete}
+              />
+            </div>
+            <div className="md:flex justify-between w-full">
+              <div className="hidden md:flex items-center gap-2 text-base text-gray-light-primary font-circular-std">
+                <span className="text-yellow-primary">★</span>
+                <span>{rating}</span>
+                {rooms.map((room, index) => (
+                  <React.Fragment key={index}>
+                    <span>•</span>
+                    <div className="flex items-center gap-1 font-circular-std">
+                      <Image
+                        src={room.icon}
+                        alt={room.name}
+                        width={16}
+                        height={16}
+                      />
+                      <span>{room.name}</span>
+                    </div>
+                  </React.Fragment>
+                ))}
               </div>
-            </React.Fragment>
-          ))}
+              <div className="flex flex-col">
+                <span className="text-base">€ 40.00</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <span className="text-base">€ 40.00</span>
-        </div>
-        </div>
-        </div>
-      </div>     
+      </div>
+      <div className="h-px bg-gray-light-secondary mb-4"></div>
     </div>
-    <div className="h-px bg-gray-light-secondary mb-4"></div>
-    </div>
-    <div className="">
+    {isSticky && <div className="h-[160px]" />} {/* Add spacing when fixed */}
+    
+    <div className="pb-4">
       {items.map((item, index) => (
-        <div key={index} className="pb-3 border-l-4 border-blue-tertery border- pl-4 flex justify-between items-center">
-          <span className="text-black-light text-base font-circular-std">{item.label}</span>
+        <div
+          key={index}
+          className="pb-3 border-l-4 border-blue-tertery border- pl-4 flex justify-between items-center"
+        >
+          <span className="text-black-light text-base font-circular-std w-24 md:w-72">
+            {item.label}
+          </span>
           <div className="flex items-center gap-3">
             <select
-              className="bg-green-light text-black-primary font-circular-std border border-green-primary rounded-lg px-2 py-1 text-sm min-w-[84px]"
+              className="bg-green-light text-black-primary font-circular-std border border-green-primary rounded-lg px-2 py-1 text-sm min-w-11 xs-md:min-w-20"
               value={item.quantity}
             >
               <option value="1">1</option>
@@ -137,7 +154,7 @@ export const ServiceItem = ({
       ))}
     </div>
     {name === "Regular House Cleaning" && (
-      <div className="mt-5 bg-purple-light p-3 rounded-lg ">
+      <div className="mt-3 bg-purple-light p-3 rounded-lg mb-5">
         <h4 className="font-semibold mb-2">Clean Regularly, Save More</h4>
         <p className="text-sm text-gray-600 mb-3">
           Subscribe for regular cleanings and keep your home spotless. Enjoy
@@ -152,14 +169,16 @@ export const ServiceItem = ({
 );
 
 export const AdditionalInfo = ({ items }: { items: InfoItem[] }) => (
-  <div className="p-5 mt-2 ">
+  <div className="py-5 px-2 xs-md:px-5 mt-2 ">
     <h3 className="font-circular-std text-black-secondary font-bold text-lg mb-3">
       Additional Information
     </h3>
     <div className="space-y-3">
       {items.map((item, index) => (
         <div key={index} className="flex items-center justify-between">
-          <span className="text-black-secondary text-base font-circular-std">{item.question}</span>
+          <span className="text-black-secondary text-base font-circular-std">
+            {item.question}
+          </span>
           <div className="flex gap-2">
             <button
               className={`w-12 h-6 rounded-full relative ${
@@ -167,7 +186,7 @@ export const AdditionalInfo = ({ items }: { items: InfoItem[] }) => (
               } transition-colors`}
               onClick={() => item.onChange(!item.value)}
             >
-              <div 
+              <div
                 className={`absolute top-1 w-5 h-4 bg-blue-light-secondary rounded-full transition-transform ${
                   item.value ? "translate-x-7" : "translate-x-1"
                 }`}
@@ -181,7 +200,7 @@ export const AdditionalInfo = ({ items }: { items: InfoItem[] }) => (
 );
 
 export const PriceDetails = ({ subTotal, visitFee }: PriceDetailsProps) => (
-  <div className="p-5 mt-2">
+  <div className="py-5 px-2 xs-md:px-5 mt-2">
     <h3 className="font-circular-std text-black-secondary font bold text-lg mb-3">
       Price Details
     </h3>
@@ -196,7 +215,9 @@ export const PriceDetails = ({ subTotal, visitFee }: PriceDetailsProps) => (
       </div>
       <div className="flex justify-between font-bold border-t border-gray-light-secondary pt-4">
         <span className="text-black-secondary">Total</span>
-        <span className="text-black-secondary">€ {(subTotal + visitFee).toFixed(2)}</span>
+        <span className="text-black-secondary">
+          € {(subTotal + visitFee).toFixed(2)}
+        </span>
       </div>
     </div>
   </div>
@@ -214,22 +235,28 @@ export const UploadImages = () => (
 );
 
 export const PromoCode = () => (
-  <div className="px-5 pt-5 pb-8 border-b-8 border-gray-light-secondary">
+  <div className="px-2 xs-md:px-5  pt-5 pb-8 border-b-8 border-gray-light-secondary">
     <h3 className="font-circular-std text-black-secondary font-bold text-lg mb-3">
       Apply Promo code
     </h3>
     <div className="flex items-center gap-2 border border-gray-secondary rounded-lg p-2">
-      <Image src="/Image/discount-shape.png" title="discount" alt="Coupon" width={20} height={20} />
+      <Image
+        src="/Image/discount-shape.png"
+        title="discount"
+        alt="Coupon"
+        width={20}
+        height={20}
+      />
       <input
         type="text"
         placeholder="Select Coupon"
         className="flex-1 outline-none text-gray-600"
       />
-      <Image 
-        src="/Image/arrow-right.png" 
-        title="apply" 
-        alt="Apply" 
-        width={16} 
+      <Image
+        src="/Image/arrow-right.png"
+        title="apply"
+        alt="Apply"
+        width={16}
         height={16}
         className="cursor-pointer"
       />
