@@ -71,7 +71,7 @@ const Footer = () => {
                       alt="Instagram"
                       width={24}
                       height={24}
-                      className="h-5 w-5"
+                      className="h-5 w-5 "
                     />
                   </a>
                   <a href="#">
@@ -92,35 +92,35 @@ const Footer = () => {
                     alt="Mastercard"
                     width={56}
                     height={35}
-                    className="h-8"
+                    className="h-8 border border-white-primary rounded-md"
                   />
                   <Image
                     src="/Image/payPal.png"
                     alt="PayPal"
                     width={56}
                     height={35}
-                    className="h-8"
+                    className="h-8 border border-white-primary rounded-md"
                   />
                   <Image
                     src="/Image/amex.png"
                     alt="American Express"
                     width={56}
                     height={35}
-                    className="h-8"
+                    className="h-8 border border-white-primary rounded-md"
                   />
                   <Image
                     src="/Image/applePay.png"
                     alt="Apple Pay"
                     width={56}
                     height={35}
-                    className="h-8"
+                    className="h-8 border border-white-primary rounded-md"
                   />
                   <Image
                     src="/Image/pay.png"
                     alt="Google Pay"
                     width={56}
                     height={35}
-                    className="h-8"
+                    className="h-8 border border-white-primary rounded-md"
                   />
                 </div>
               </div>
@@ -250,35 +250,35 @@ const Footer = () => {
               alt="Mastercard"
               width={56}
               height={35}
-              className="h-9"
+              className="h-9 border border-white-primary rounded-md"
             />
             <Image
               src="/Image/payPal.png"
               alt="PayPal"
               width={56}
               height={35}
-              className="h-9"
+              className="h-9 border border-white-primary rounded-md"
             />
             <Image
               src="/Image/amex.png"
               alt="American Express"
               width={56}
               height={35}
-              className="h-9"
+              className="h-9 border border-white-primary rounded-md"
             />
             <Image
               src="/Image/applePay.png"
               alt="Apple Pay"
               width={56}
               height={35}
-              className="h-9"
+              className="h-9 border border-white-primary rounded-md"
             />
             <Image
               src="/Image/pay.png"
               alt="Google Pay"
               width={56}
               height={35}
-              className="h-9"
+              className="h-9 border border-white-primary rounded-md"
             />
           </div>
 

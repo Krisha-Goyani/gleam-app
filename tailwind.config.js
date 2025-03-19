@@ -51,7 +51,7 @@ module.exports = {
         'black-secondary': '#373A36',
         'black-primary': '#262626',
         'black-light': '#1D1D1D',
-        'text-white': '#FFFFFF',
+        'white-primary': '#FFF2F5',
         'container-bg': '#9e9fc1',
         'bg-info': '#E4EAEC',
         'green-light': '#ECFFDB',

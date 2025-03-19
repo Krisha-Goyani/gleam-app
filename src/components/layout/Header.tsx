@@ -29,10 +29,10 @@ const Header = () => {
                 <Image
                   src="/Image/logo.png"
                   alt="Gleam"
-                  width={150}
-                  height={35}
+                  width={165}
+                  height={73}
                   priority
-                  className="w-40 h-18 object-contain"
+                  className="w-40 h-16 object-contain"
                 />
               </a>
             </div>

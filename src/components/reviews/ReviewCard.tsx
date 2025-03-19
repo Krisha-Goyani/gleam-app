@@ -74,7 +74,7 @@ const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
                 alt={`Review ${index + 1}`}
                 width={70}
                 height={70}
-                className="rounded-lg object-cover pb-3"
+                className="rounded-lg object-cover mb-3"
               />
             ))}
           </div>
