@@ -17,13 +17,13 @@ export default function Document() {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Gleam App" />
         <meta property="og:description" content="Professional Cleaning Service Solution" />
-        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:image" content="https://gleam-app.netlify.app/Image/og-image.png" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Gleam App" />
         <meta name="twitter:description" content="Professional Cleaning Service Solution" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta name="twitter:image" content="https://gleam-app.netlify.app/Image/og-image.png" />
         
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
