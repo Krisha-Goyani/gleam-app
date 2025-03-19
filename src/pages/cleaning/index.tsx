@@ -30,7 +30,7 @@ const CleaningPage = () => {
         {/* Additional SEO tags */}
         <meta name="keywords" content="cleaning service, house cleaning, professional cleaning, deep cleaning, home service" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://yourwebsite.com/cleaning/${selectedService.name.toLowerCase().replace(/\s+/g, '-')}`} />
+        <link rel="canonical" href={`https://gleam-app.netlify.app/${selectedService.name.toLowerCase().replace(/\s+/g, '-')}`} />
       </Head>
       <CleaningService />
     </>
