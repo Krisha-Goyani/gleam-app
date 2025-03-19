@@ -20,7 +20,12 @@ const CleaningPage = () => {
         <meta property="og:site_name" content="Gleam Cleaning Services" />
         <meta property="og:title" content="Professional Cleaning Services | Gleam Cleaning" />
         <meta property="og:description" content="Transform your space with our professional cleaning services. Expert cleaners, eco-friendly products, and guaranteed satisfaction for homes and offices." />
+        <meta property="og:url" content="https://gleam-app.netlify.app/cleaning" />
         <meta property="og:image" content="https://gleam-app.netlify.app/Image/og-img.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:locale" content="en_US" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
