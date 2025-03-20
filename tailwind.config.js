@@ -31,10 +31,13 @@ module.exports = {
       },
       colors: {       
         // green
-        'green-light-secondary': '#F2F7ED',
         'green-primary': '#79AE48',
-        'green-light': '#ECFFDB',
+        'green-light-primary': '#4BAE4F',
         'green-secondary': '#67963c',
+        'green-light-secondary': '#F2F7ED',
+        'green-light': '#ECFFDB',
+        // red
+        'red-primary' :'#F34235',
         // yellow
         'yellow-primary': '#FAC917',
         'yellow-secondary': '#FFE815',

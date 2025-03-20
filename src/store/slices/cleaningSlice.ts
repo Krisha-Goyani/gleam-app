@@ -64,13 +64,13 @@ const initialState: CleaningState & { checklist: ChecklistItem[] } = {
       mainImage: "/Image/cleaning-img.png",
       thumbnails: [
         "/Image/cleaning-img.png",
-        "/Image/extra-img2.png",
+        "/Image/cleaning-img1.png",
+        "/Image/cleaning-img2.png",
+        "/Image/cleaning-img3.png",
         "/Image/cleaning-img.png",
-        "/Image/cleaning-img.png",
-        "/Image/cleaning-img.png",
-        "/Image/cleaning-img.png",
-        "/Image/cleaning-img.png",
-        "/Image/cleaning-img.png"
+        "/Image/cleaning-img1.png",
+        "/Image/cleaning-img2.png",
+        "/Image/cleaning-img3.png",
       ],
       extras: [
         {

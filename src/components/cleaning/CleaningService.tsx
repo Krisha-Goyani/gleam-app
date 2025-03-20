@@ -3,8 +3,9 @@ import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, CleaningExtra } from "@/types/redux";
 import { updateExtra } from "@/store/slices/cleaningSlice";
-import ServiceChecklist from "../ui/ServiceChecklist";
+// import ServiceChecklist from "../ui/ServiceChecklist";
 import CartMenu from "@/components/cart/CartMenu";
+import IncludedExcluded from "./IncludedExcluded";
 
 // Types
 interface ServiceIncludes {
@@ -463,14 +464,7 @@ const CleaningService: React.FC = () => {
             </div>
 
             {/* Included & Excluded Section */}
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">
-                Included & Excluded
-              </h2>
-              <div className="md:w-[400px] md-lg:w-[430px] lg:w-[450px] lg-sm:w-[477px] pr-6">
-                <ServiceChecklist />
-              </div>
-            </div>
+            <IncludedExcluded />
           </div>
         </div>
       </div>

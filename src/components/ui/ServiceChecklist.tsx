@@ -46,7 +46,7 @@ const ServiceChecklist: React.FC<ServiceChecklistProps> = ({ className = '' }) =
             className="w-full py-3 flex items-center justify-between bg-white text-left group"
             aria-expanded={!collapsedSections[sectionId]}
           >
-            <span className="text-base text-gray-900">{section.title}</span>
+            <span className="text-sm text-black-light">{section.title}</span>
             <svg
               className={`w-4 h-4 text-gray-400 transform transition-transform duration-200 ${
                 collapsedSections[sectionId] ? 'rotate-180' : ''
@@ -72,7 +72,7 @@ const ServiceChecklist: React.FC<ServiceChecklistProps> = ({ className = '' }) =
                 >
                   <div 
                     className={`w-4 h-4 rounded-full flex items-center justify-center mr-3 flex-shrink-0 ${
-                      item.isIncluded ? 'bg-green-500' : 'bg-red-500'
+                      item.isIncluded ? 'bg-green-light-primary' : 'bg-red-primary'
                     }`}
                   >
                     {item.isIncluded ? (
@@ -97,7 +97,7 @@ const ServiceChecklist: React.FC<ServiceChecklistProps> = ({ className = '' }) =
                       </svg>
                     )}
                   </div>
-                  <span className="text-sm text-gray-600">{item.title}</span>
+                  <span className="text-base text-black-secondary">{item.title}</span>
                 </div>
               ))}
             </div>
