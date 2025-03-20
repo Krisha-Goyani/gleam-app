@@ -67,11 +67,12 @@ const Footer = () => {
             <div className="">
               <div className="flex flex-col justify-end  mb-12">
                 {/* Social Media Icons */}
-                <div className="flex justify-end space-x-4 mb-8">
+                <div className="flex cursor-pointer justify-end space-x-4 mb-8">
                   <a href="#">
                     <Image
                       src="/Image/insta.png"
                       alt="Instagram"
+                      title="Instagram"
                       width={24}
                       height={24}
                       className="h-5 w-5 "
@@ -81,6 +82,7 @@ const Footer = () => {
                     <Image
                       src="/Image/ln.png"
                       alt="LinkedIn"
+                      title="LinkedIn"
                       width={24}
                       height={24}
                       className="h-5 w-5"
@@ -88,11 +90,12 @@ const Footer = () => {
                   </a>
                 </div>
 
-                <div className="flex justify-end space-x-4 mb-8">
+                <div className="flex cursor-pointer justify-end space-x-4 mb-8">
                   {/* Payment Method Icons */}
                   <Image
                     src="/Image/mastercard.png"
                     alt="Mastercard"
+                    title="Mastercard"
                     width={56}
                     height={35}
                     className="h-8 border border-white-primary rounded-md"
@@ -100,6 +103,7 @@ const Footer = () => {
                   <Image
                     src="/Image/payPal.png"
                     alt="PayPal"
+                    title="PayPal"
                     width={56}
                     height={35}
                     className="h-8 border border-white-primary rounded-md"
@@ -107,6 +111,7 @@ const Footer = () => {
                   <Image
                     src="/Image/amex.png"
                     alt="American Express"
+                    title="American Express"
                     width={56}
                     height={35}
                     className="h-8 border border-white-primary rounded-md"
@@ -114,6 +119,7 @@ const Footer = () => {
                   <Image
                     src="/Image/applePay.png"
                     alt="Apple Pay"
+                    title="Apple Pay"
                     width={56}
                     height={35}
                     className="h-8 border border-white-primary rounded-md"
@@ -121,6 +127,7 @@ const Footer = () => {
                   <Image
                     src="/Image/pay.png"
                     alt="Google Pay"
+                    title="Google Pay"
                     width={56}
                     height={35}
                     className="h-8 border border-white-primary rounded-md"
@@ -146,7 +153,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex mt-10 justify-between items-end">
+        <div className="lg-sm:flex mt-10 justify-between items-end">
           <div className="">
             <h3 className="text-xl font-circular-std  mb-2">Sign up to our newsletter</h3>
             <div className="flex gap-2">
@@ -162,7 +169,7 @@ const Footer = () => {
               </button>
             </div>
           </div>
-        <div className="mt-8 text-base">Copyright © 2024, GleamYourCasa</div>
+        <div className="mt-4 lg-sm:mt-8 text-base">Copyright © 2024, GleamYourCasa</div>
         </div>
       </div>
 
@@ -234,12 +241,15 @@ const Footer = () => {
             </ul>
           </div>
 
+          <div><Image src='/Image/line.png' height={1} width={360} className="w-full" alt="line" title="line"/></div>
+
           {/* Social Media Icons */}
           <div className="flex gap-4">
             <a href="#">
               <Image
                 src="/Image/insta.png"
                 alt="Instagram"
+                title="Instagram"
                 width={24}
                 height={24}
                 className="h-4 w-4"
@@ -249,6 +259,7 @@ const Footer = () => {
               <Image
                 src="/Image/ln.png"
                 alt="LinkedIn"
+                title="LinkedIn"
                 width={24}
                 height={24}
                 className="h-4 w-4"
@@ -261,6 +272,7 @@ const Footer = () => {
             <Image
               src="/Image/mastercard.png"
               alt="Mastercard"
+              title="Mastercard"
               width={56}
               height={35}
               className="h-9 border border-white-primary rounded-md"
@@ -268,6 +280,7 @@ const Footer = () => {
             <Image
               src="/Image/payPal.png"
               alt="PayPal"
+              title="PayPal"
               width={56}
               height={35}
               className="h-9 border border-white-primary rounded-md"
@@ -275,6 +288,7 @@ const Footer = () => {
             <Image
               src="/Image/amex.png"
               alt="American Express"
+              title="American Express"
               width={56}
               height={35}
               className="h-9 border border-white-primary rounded-md"
@@ -282,6 +296,7 @@ const Footer = () => {
             <Image
               src="/Image/applePay.png"
               alt="Apple Pay"
+              title="Apple Pay"
               width={56}
               height={35}
               className="h-9 border border-white-primary rounded-md"
@@ -289,6 +304,7 @@ const Footer = () => {
             <Image
               src="/Image/pay.png"
               alt="Google Pay"
+              title="Google Pay"
               width={56}
               height={35}
               className="h-9 border border-white-primary rounded-md"
@@ -312,6 +328,8 @@ const Footer = () => {
             </div>
           </div>
 
+          <div><Image src='/Image/line.png' height={1} width={360} className="w-full" alt="line" title="line"/></div>
+
           {/* Get in touch */}
           <div>
             <h3 className="text-sm mb-2">Get in touch</h3>
@@ -327,6 +345,7 @@ const Footer = () => {
                 <Image 
                   src="/Image/whatsapp.png" 
                   alt="WhatsApp" 
+                  title="whatsapp"
                   height={16} 
                   width={16}
                   className="w-4 h-4"

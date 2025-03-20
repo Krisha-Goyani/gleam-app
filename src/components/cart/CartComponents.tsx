@@ -75,7 +75,7 @@ export const ServiceItem = ({
       )}
       <div className="flex justify-between mb-3">
         <div className="flex gap-4">
-          <Image src={image} alt={name} width={100} height={50} className="w-20 md:w-32 h-20" />
+          <Image src={image} title="cart-img" alt={name} width={100} height={50} className="w-20 md:w-32 h-20" />
           <div className="flex flex-col w-[300px] md:w-[470px]">
             <div className="flex justify-between w-full">
               <h3 className="font-circular-std font-bold text-lg mb-1 text-gray-light-primary">
@@ -84,6 +84,7 @@ export const ServiceItem = ({
               <Image
                 src="/Image/delete.png"
                 alt="Delete"
+                title="delete"
                 width={20}
                 height={20}
                 className="h-5 w-5 cursor-pointer self-center"
@@ -101,6 +102,7 @@ export const ServiceItem = ({
                       <Image
                         src={room.icon}
                         alt={room.name}
+                        title="room-icon"
                         width={16}
                         height={16}
                       />
@@ -145,6 +147,7 @@ export const ServiceItem = ({
               <Image
                 src="/Image/delete.png"
                 alt="Remove"
+                title="remove"
                 width={17.61}
                 height={17.61}
               />

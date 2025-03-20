@@ -29,6 +29,7 @@ const Header = () => {
                 <Image
                   src="/Image/logo.png"
                   alt="Gleam"
+                  title="gleam"
                   width={165}
                   height={73}
                   priority

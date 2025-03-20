@@ -21,7 +21,7 @@ const initialState: ReviewsState = {
     {
       id: '1',
       rating: 4.0,
-      title: 'Auctor donec amet facilisis ornare',
+      title: 'Lorem ipsum dolor',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscinget, sed do eiusmod',
       author: 'Josephine Jose',
       timeAgo: '10h ago',
@@ -42,8 +42,8 @@ const initialState: ReviewsState = {
     {
       id: '3',
       rating: 4.0,
-      title: 'Lorem ipsum dolor sit amet consectetur.',
-      description: 'Lorem ipsum dolor sit amet consectetur. Nunc amet lacus arcu pharetra. Enim ullamcorper hendrerit a senectus tellus amet nam faucibus. Orci sed.',
+      title: 'Lorem ipsum dolor ',
+      description: 'Lorem ipsum dolor sit amet consectetur. Nunc amet lacus arcu pharetra. Enim ullamcorper hendrerit a senectus tellus amet nam faucibus. Orci sed.Nunc amet lacus arcu pharetra.',
       author: 'Josephine Jose',
       timeAgo: '10h ago',
       likes: 5,

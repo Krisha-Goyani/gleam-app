@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { UserState } from '@/types/types';
 
 const initialState: UserState = {
-  location: 'New York',
+  location: 'Austin, Texas',
   favorites: [],
   notifications: 0,
   cartItems: 0

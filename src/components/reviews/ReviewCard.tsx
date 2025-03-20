@@ -1,5 +1,6 @@
 import type { Review } from "@/types/types";
 import Image from "next/image";
+import { useState } from "react";
 
 interface ReviewCardProps {
   review: Review;
@@ -7,6 +8,8 @@ interface ReviewCardProps {
 }
 
 const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="pt-6 ">
       <div className={`${!isLast ? 'border-b border-gray-light-secondary' : ''} pb-3`}>
@@ -17,6 +20,7 @@ const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
                 <Image
                   src="/Image/star.png"
                   alt="Star"
+                  title="star"
                   width={12}
                   height={12}
                   className="w-3 h-3"
@@ -24,13 +28,13 @@ const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
                 {review.rating}
               </span>
             </div>
-            <h3 className="font-circular-std text-base font-medium text-black-secondary">
+            <h3 className="font-circular-std text-sm md:text-base font-medium text-black-secondary">
               {review.title}
             </h3>
           </div>
           <div className="flex items-center gap-2">
             <button className="flex items-center gap-1 text-gray-500">
-              <Image src="/Image/like.png" alt="Like" width={14} height={12} />
+              <Image src="/Image/like.png" title="like" alt="Like" width={14} height={12} />
               <span className="font-circular-std text-base">
                 ({review.likes})
               </span>
@@ -39,6 +43,7 @@ const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
               <Image
                 src="/Image/dislike.png"
                 alt="Dislike"
+                title="dislike"
                 width={14}
                 height={12}
               />
@@ -48,6 +53,7 @@ const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
               <Image
                 src="/Image/caution.png"
                 alt="Report"
+                title="Report"
                 width={14}
                 height={12}
               />
@@ -56,10 +62,23 @@ const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
         </div>
 
         <p className="text-sm font-circular-std text-black-secondary font-normal mb-1">
-          {review.description}
+          {isExpanded
+            ? review.description
+            : review.description.length > 150
+            ? `${review.description.slice(0, 150)}...`
+            : review.description
+          }
+          {review.description.length > 150 && (
+            <button 
+              className="text-blue-primary font-circular-std ml-1 hover:underline cursor-pointer inline-block"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'See less' : 'See more'}
+            </button>
+          )}
         </p>
 
-        <div className="flex items-center text-sm text-gray-light-secondary mb-3">
+        <div className="flex items-center text-sm text-gray-light-tertary mb-3">
           <span>{review.author}</span>
           <span className="mx-2">•</span>
           <span>{review.timeAgo}</span>
@@ -71,6 +90,7 @@ const ReviewCard = ({ review, isLast = false }: ReviewCardProps) => {
               <Image
                 key={index}
                 src={image}
+                title="Review"
                 alt={`Review ${index + 1}`}
                 width={70}
                 height={70}
