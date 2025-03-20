@@ -39,7 +39,7 @@ body {
 }
 .container-main{
   max-width: 1440px;
-  /* background-color: rgb(192, 170, 170); */
+  background-color: white;
   margin: 0 auto;
 }
 

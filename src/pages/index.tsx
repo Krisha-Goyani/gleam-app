@@ -20,13 +20,15 @@ export default function Home() {
   }, [dispatch, services]);
 
   return (
-    <div className="container-main">
+    <div>   
       <Header />
+    <div className="container-main">
       <CleaningService />
       <div className=" px-4 sm:px-6 md:px-8 md-lg:px-16 container-main">
         <ServiceReviews />
         <UserReviews />
       </div>
+    </div>
       <Footer />
     </div>
   );

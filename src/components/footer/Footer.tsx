@@ -3,11 +3,14 @@ import Image from "next/image";
 
 const Footer = () => {
   const [emailAddress, setEmailAddress] = useState("");
+  // Add state for section toggles
+  const [isAboutUsOpen, setIsAboutUsOpen] = useState(true);
+  const [isNeedHelpOpen, setIsNeedHelpOpen] = useState(true);
 
   return (
-    <footer className="bg-blue-secondary px-4 sm:px-6 md:px-8 md-lg:px-16 text-white">
+    <footer className="bg-blue-secondary  text-white">
       {/* Desktop View */}
-      <div className="hidden md-lg:block container mx-auto pt-16 py-8">
+      <div className="hidden md-lg:block container px-4 sm:px-6 md:px-8 md-lg:px-16 mx-auto pt-16 py-8">
         <div className="flex justify-between">
           <div className="flex gap-16">
             {/* Column 1 - About Us */}
@@ -164,15 +167,20 @@ const Footer = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md-lg:hidden py-8">
+      <div className="md-lg:hidden py-8 px-4 sm:px-6 md:px-8 md-lg:px-16">
         <div className="space-y-6">
           {/* About Us Section */}
           <div>
-            <h3 className="font-semibold mb-3 flex justify-between items-center">
+            <h3 
+              className="font-semibold mb-3 flex gap-3 items-center cursor-pointer"
+              onClick={() => setIsAboutUsOpen(!isAboutUsOpen)}
+            >
               About Us
-              <span className="text-xl">▼</span>
+              <span className={`text-sm transition-transform ${isAboutUsOpen ? 'rotate-0' : '-rotate-180'}`}>
+                ▼
+              </span>
             </h3>
-            <ul className="space-y-3">
+            <ul className={`space-y-3 transition-all duration-300 ${isAboutUsOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
               <li>
                 <a href="#" className="hover:opacity-80">
                   Who we are
@@ -188,11 +196,16 @@ const Footer = () => {
 
           {/* Need Help Section */}
           <div>
-            <h3 className="font-semibold mb-3 flex justify-between items-center">
+            <h3 
+              className="font-semibold mb-3 flex gap-3 items-center cursor-pointer"
+              onClick={() => setIsNeedHelpOpen(!isNeedHelpOpen)}
+            >
               Need Help?
-              <span className="text-xl">▼</span>
+              <span className={`text-sm transition-transform ${isNeedHelpOpen ? 'rotate-0' : '-rotate-180'}`}>
+                ▼
+              </span>
             </h3>
-            <ul className="space-y-3">
+            <ul className={`space-y-3 transition-all duration-300 ${isNeedHelpOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
               <li>
                 <a href="#" className="hover:opacity-80">
                   Contact Us
