@@ -29,43 +29,36 @@ module.exports = {
         'circular-pro': ['Circular Pro', 'sans-serif'],
         'circular-air-pro': ['Circular Air Pro', 'sans-serif'],
       },
-      colors: {
-        'border-primary': '#FFF1F1',
-        'border-secondary': '#bebebe',
-        'border-green': '#45C917',
+      colors: {       
+        // green
+        'green-light-secondary': '#F2F7ED',
         'green-primary': '#79AE48',
-        'border-red': '#BF0000',
+        'green-light': '#ECFFDB',
+        'green-secondary': '#67963c',
+        // yellow
         'yellow-primary': '#FAC917',
         'yellow-secondary': '#FFE815',
+        // gray
         'gray-secondary' : '#D7D2CB',
         'gray-light-secondary': '#F0ECE7',
         'gray-light-primary': '#4C5163',
         'gray-tertary': '#D2CFE1',
         'gray-light-tertary': '#373A3654',
-        'green-light-secondary': '#F2F7ED',
-        'text-primary': '#2c2c2c',
-        'text-green': '#45C917',
-        'text-red': '#BF0000',
+        // black
         'black-secondary': '#373A36',
         'black-primary': '#262626',
         'black-light': '#1D1D1D',
         'white-primary': '#FFF2F5',
-        'container-bg': '#9e9fc1',
-        'bg-info': '#E4EAEC',
-        'green-light': '#ECFFDB',
-        'bg-orange': '#FF9500',
+        // blue
         'blue-primary': '#517EE5',
         'blue-light-primary': '#D2EEFF',
         'blue-secondary': '#0071B4',
         'blue-tertery': '#C0D1E6',
         'blue-light': '#EBF4FF',
         'blue-light-secondary': '#B7C7DB',
-        'text-blue': '#5D76FF',
-        'bg-gray-light': '#FBFCFF',
-        'bg-red': '#FF3B30',
+        // purple
         'purple-light': '#ECD5FF',
         'purple-primary': '#B457FD',
-
       },
       container: {
         center: true,
