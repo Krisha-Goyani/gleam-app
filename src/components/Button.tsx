@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface ButtonProps {
-  text: string;
+  text: string | ReactNode;
   className: string;
   onClick?: () => void;
 }
@@ -14,4 +14,4 @@ const Button: React.FC<ButtonProps> = ({ text, className, onClick }) => {
   );
 };
 
-export default Button; 
+export default Button;
