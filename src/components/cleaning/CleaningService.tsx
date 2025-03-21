@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, memo } from "react";
+import React, { useState, useCallback, memo } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, CleaningExtra } from "@/types/redux";
@@ -6,6 +6,7 @@ import { updateExtra } from "@/store/slices/cleaningSlice";
 // import ServiceChecklist from "../ui/ServiceChecklist";
 import CartMenu from "@/components/cart/CartMenu";
 import IncludedExcluded from "./IncludedExcluded";
+import Dropdown from "@/components/Dropdown";
 
 // Types
 interface ServiceIncludes {
@@ -124,28 +125,30 @@ const ActionButton = memo(
   ({
     icon,
     onClick,
-    isActive = false,
-    activeColor = "text-red-500",
+    // isActive = false,
+    // activeColor = "text-red-500",
+    children
   }: {
-    icon: string;
+    icon?: string;
     onClick?: () => void;
     isActive?: boolean;
     activeColor?: string;
+    children?: React.ReactNode;
   }) => (
     <button
-      className={`p-2 ${
-        isActive ? activeColor : "text-gray-600 hover:text-gray-900"
-      } transition-colors rounded-full`}
+      className={`p-2 transition-colors rounded-full`}
       onClick={onClick}
     >
-      <Image
-        src={icon}
-        alt="Action"
-        title="action"
-        width={24}
-        height={24}
-        className="w-6 h-6"
-      />
+      {children || (
+        <Image
+          src={icon!}
+          alt="Action"
+          title="action"
+          width={24}
+          height={24}
+          className="w-6 h-6"
+        />
+      )}
     </button>
   )
 );
@@ -157,7 +160,7 @@ const ExtraItem = memo(
     image,
     price,
     originalPrice,
-    quantity = 0,
+    quantity = 1.5, // Set default quantity to 1.5
     onQuantityChange,
     index,
     totalItems,
@@ -171,68 +174,12 @@ const ExtraItem = memo(
     index: number;
     totalItems: number;
   }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const isWashService = name.toLowerCase().includes("wash");
-
-    const handleQuantitySelect = useCallback(
-      (newQuantity: number) => {
-        onQuantityChange(newQuantity);
-        setIsOpen(false);
-      },
-      [onQuantityChange]
-    );
-
-    const renderDropdown = useMemo(() => {
-      const options = isWashService ? [1, 2, 3] : [1.5, 2.0, 2.5];
-
-      return (
-        <div className="relative">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`h-8 w-20 px-2 hover:border-green-300 transition-colors min-w-[100px] text-center flex items-center justify-between gap-2
-          ${
-            isWashService
-              ? "bg-transparent border border-gray-300 text-gray-600 hover:bg-gray-50"
-              : "bg-green-light text-black-primary border border-green-primary"
-          } 
-          font-circular-std rounded-lg text-sm relative`}
-          >
-            <span>{quantity || (isWashService ? 1 : 1.5)}</span>
-            <div className="flex items-center gap-1">
-              <Image
-                src="/Image/arrow-down.png"
-                alt="arrow"
-                title="arrow"
-                width={16}
-                height={16}
-                className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
-              />
-            </div>
-            <Image
-              src="/Image/cross-icon.png"
-              alt="cross"
-              title="cross"
-              width={16}
-              height={16}
-              className="absolute -top-2 -right-2"
-            />
-          </button>
-          {isOpen && (
-            <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-              {options.map((option) => (
-                <div
-                  key={option}
-                  className="py-2 px-4 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => handleQuantitySelect(option)}
-                >
-                  {option.toFixed(1)}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      );
-    }, [isOpen, isWashService, quantity, handleQuantitySelect]);
+    // Set initial quantity for first two items
+    React.useEffect(() => {
+      if (index < 2 && quantity === 0) {
+        onQuantityChange(1.5);
+      }
+    }, []);
 
     return (
       <div
@@ -256,7 +203,9 @@ const ExtraItem = memo(
             <Price price={price} originalPrice={originalPrice} size="small" />
           </div>
         </div>
-        <div className="flex items-center gap-2">{renderDropdown}</div>
+        <div className="flex items-center gap-2">
+          <Dropdown quantity={quantity} onQuantityChange={onQuantityChange} />
+        </div>
       </div>
     );
   }
@@ -281,10 +230,10 @@ const ThumbnailGallery = memo(
         {images.map((image, index) => (
           <button
             key={index}
-            className={`shrink-0 relative w-[140px] h-[87px] border-2 overflow-hidden ${
+            className={`shrink-0 relative w-[140px] h-[87px] border-2  overflow-hidden transition-all duration-300 ${
               selectedIndex === index
                 ? "border-blue-primary"
-                : "border-transparent"
+                : "border-transparent hover:border-blue-primary/50"
             }`}
             onClick={() => onSelect(index)}
           >
@@ -293,8 +242,8 @@ const ThumbnailGallery = memo(
               alt={`Thumbnail ${index + 1}`}
               title="cleaning-img"
               fill
-              className={`object-cover transition-all duration-200 ${
-                selectedIndex !== index ? "blur-[2px] brightness-75" : ""
+              className={`object-cover transition-all duration-300 ${
+                selectedIndex !== index ? "brightness-75" : ""
               }`}
             />
           </button>
@@ -348,7 +297,7 @@ const CleaningService: React.FC = () => {
               height={12}
             />
           </span>
-          <a href="#" className="text-black-secondary hover:text-gray-600">
+          <a href="#" className="text-black-secondary border-b border-black-secondary hover:text-gray-600">
             Regular House Cleaning
           </a>
         </nav>
@@ -370,11 +319,17 @@ const CleaningService: React.FC = () => {
                 </div>
               </div>
               {/* Bottom slider bar */}
-              <div className="hidden md-lg:block absolute bottom-4 left-1/2 -translate-x-1/2 z-20 md-lg:w-[300px] lg-sm:w-[350px] xl:w-[550px] mr-4 h-[3px] bg-gray-light-secondary rounded-full">
-                <div className="absolute left-0 top-0 h-full md-lg:-w-[40px] lg-sm:w-[50px] w-[67px] bg-black rounded-full"></div>
+              <div className="hidden md-lg:block absolute bottom-4 left-1/2 -translate-x-1/2 z-20 w-[80%] h-[3px] bg-gray-200/50 rounded-full">
+                <div 
+                  className="absolute left-0 top-0 h-full bg-black rounded-full transition-all duration-300"
+                  style={{ 
+                    width: `${100 / selectedService.thumbnails.length}%`,
+                    transform: `translateX(${selectedImageIndex * 100}%)`
+                  }}
+                />
               </div>
               <Image
-                src={selectedService.mainImage}
+                src={selectedService.thumbnails[selectedImageIndex]}
                 alt={selectedService.name}
                 title="Main Image"
                 fill
@@ -398,15 +353,64 @@ const CleaningService: React.FC = () => {
                 </h1>
                 <RatingStars rating={selectedService.rating} />
               </div>
+              {/* // Replace the heart ActionButton in the CleaningService component with: */}
               <div className="flex gap-3">
                 <div className="hidden md-lg:block">
-                  <ActionButton icon="/Image/share.png" />
+                  <ActionButton>
+                    <div className="w-12 h-12 rounded-full bg-[#F0ECE7] bg-opacity-50 flex items-center justify-center pt-1">
+                      <svg 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path 
+                          d="M6 12C6 13.6569 4.65685 15 3 15C1.34315 15 0 13.6569 0 12C0 10.3431 1.34315 9 3 9C4.65685 9 6 10.3431 6 12Z" 
+                          fill="#0071B4"
+                        />
+                        <path 
+                          d="M15 6C15 7.65685 13.6569 9 12 9C10.3431 9 9 7.65685 9 6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6Z" 
+                          fill="#0071B4"
+                        />
+                        <path 
+                          d="M15 18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18C9 16.3431 10.3431 15 12 15C13.6569 15 15 16.3431 15 18Z" 
+                          fill="#0071B4"
+                        />
+                        <path 
+                          d="M5.63605 13.0503L11.364 16.9497" 
+                          stroke="#0071B4" 
+                          strokeWidth="2"
+                        />
+                        <path 
+                          d="M11.364 7.05025L5.63605 10.9497" 
+                          stroke="#0071B4" 
+                          strokeWidth="2"
+                        />
+                      </svg>
+                    </div>
+                  </ActionButton>
                 </div>
-                <ActionButton
-                  icon="/Image/blue-heart.png"
-                  onClick={handleFavoriteToggle}
-                  isActive={isFavorite}
-                />
+                <ActionButton onClick={handleFavoriteToggle}>
+                  <div className="w-12 h-12 rounded-full bg-[#F0ECE7] bg-opacity-50 flex items-center justify-center">
+                    <svg 
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path 
+                        d="M12.62 20.8101C12.28 20.9301 11.72 20.9301 11.38 20.8101C8.48 19.8201 2 15.6901 2 8.69006C2 5.60006 4.49 3.10006 7.56 3.10006C9.38 3.10006 10.99 3.98006 12 5.34006C13.01 3.98006 14.63 3.10006 16.44 3.10006C19.51 3.10006 22 5.60006 22 8.69006C22 15.6901 15.52 19.8201 12.62 20.8101Z" 
+                        fill={isFavorite ? "#0071B4" : "none"} 
+                        stroke="#0071B4" 
+                        strokeWidth="1.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </ActionButton>
               </div>
             </div>
 
