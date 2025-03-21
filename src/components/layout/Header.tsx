@@ -36,15 +36,16 @@ const Header = () => {
 
             {/* Right - Icons */}
             <div className="w-1/3 flex items-center justify-end gap-11">
-              <HeaderIcon src="/Image/search.png" alt="Search" />
-              <HeaderIcon src="/Image/heart.png" alt="Favorites" />
-              <HeaderIcon src="/Image/notification.png" alt="Notifications" />
+              <HeaderIcon src="/Image/search.png" alt="Search" title="search" />
+              <HeaderIcon src="/Image/heart.png" alt="Favorites" title="favorites" />
+              <HeaderIcon src="/Image/notification.png" alt="Notifications" title="notifications" />
               <HeaderIcon 
                 src="/Image/cart.png" 
                 alt="Cart" 
+                title="cart"
                 onClick={() => setIsCartOpen(true)}
               /> 
-              <HeaderIcon src="/Image/profile.png" alt="Notifications" />
+              <HeaderIcon src="/Image/profile.png" alt="Notifications" title="profile" />
             </div>
           </div>
         </div>

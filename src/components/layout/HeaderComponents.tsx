@@ -6,10 +6,12 @@ import type { RootState } from "@/types/types";
 export const HeaderIcon = ({ 
   src, 
   alt,
+  title,
   onClick 
 }: { 
   src: string; 
   alt: string;
+  title?: string;
   onClick?: () => void;
 }) => (
   <div 
@@ -19,6 +21,7 @@ export const HeaderIcon = ({
     <Image
       src={src}
       alt={alt}
+      title={title}
       width={24}
       height={24}
       className="w-6 h-6"

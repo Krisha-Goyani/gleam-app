@@ -10,7 +10,7 @@ export default function Document() {
         <meta name="theme-color" content="#000000" />
         
         {/* Default Meta Tags - Override these in individual pages as needed */}
-        <meta name="description" content="Transform your space with Gleam's professional cleaning services. Expert cleaners, eco-friendly solutions, and guaranteed satisfaction for homes and offices." />
+        <meta name="description" content="Experience expert cleaning services for your home with Gleam Your Casa including deep cleaning dusting and more." />
         <meta name="keywords" content="cleaning service, professional cleaning, home cleaning, gleam app" />
         
         {/* Open Graph / Facebook */}
