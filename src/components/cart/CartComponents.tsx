@@ -2,36 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Dropdown from "../Dropdown";
 
-// Component Interfaces
-export interface ServiceItemProps {
-  name: string;
-  rating: number;
-  rooms: {
-    name: string;
-    icon: string;
-  }[];
-  // items: {
-  //   label: string;
-  //   // quantity: number;
-  //   price: number;
-  // }[];
-  onDelete: () => void;
-  isSticky?: boolean;
-}
-
 export interface InfoItem {
   question: string;
   value: boolean;
   onChange: (value: boolean) => void;
 }
-
 export interface PriceDetailsProps {
   subTotal: number;
   visitFee: number;
 }
-
-// Cart Components
-// Update the interface first
 export interface ServiceItemProps {
   name: string;
   image: string;
@@ -48,6 +27,7 @@ export interface ServiceItemProps {
   onDelete: () => void;
   onClose: () => void;
   onQuantityChange: (index: number, value: number) => void;
+  onItemDelete: (index: number) => void;  // Add this new prop
   isSticky?: boolean;
 }
 
@@ -58,7 +38,8 @@ export const ServiceItem = ({
   rating,
   rooms,
   items,
-  onDelete,
+  onDelete,  // This prop will handle the removal of the entire service item
+  onItemDelete,
   onQuantityChange,
 }: ServiceItemProps) => (
   <div className="relative">
@@ -85,7 +66,7 @@ export const ServiceItem = ({
                 width={20}
                 height={20}
                 className="h-5 w-5 cursor-pointer self-center"
-                onClick={onDelete}
+                onClick={onDelete}  // This will trigger the removal of the entire service item
               />
             </div>
             <div className="md:flex justify-between w-full">
@@ -129,13 +110,13 @@ export const ServiceItem = ({
           </span>
           <div className="flex items-center gap-3">
             <Dropdown 
-              quantity={item.quantity } 
+              quantity={item.quantity} 
               onQuantityChange={(value) => onQuantityChange(index, value)} 
             />
             <span className="text-black-light text-base font-circular-std min-w-[80px] text-right">
               € {item.price.toFixed(2)}
             </span>
-            <button className="p-1">
+            <button className="p-1" onClick={() => onItemDelete(index)}>
               <Image
                 src="/Image/delete.png"
                 alt="Remove"
@@ -148,18 +129,7 @@ export const ServiceItem = ({
         </div>
       ))}
     </div>
-    {name === "Regular House Cleaning" && (
-      <div className="mt-3 bg-purple-light p-3 rounded-lg mb-5">
-        <h4 className="font-semibold mb-2">Clean Regularly, Save More</h4>
-        <p className="text-sm text-gray-600 mb-3">
-          Subscribe for regular cleanings and keep your home spotless. Enjoy
-          automatic bookings and save time and money
-        </p>
-        <button className="bg-purple-primary h-10 w-56 text-white px-4 py-2 rounded-md text-sm">
-          Subscribe and save more
-        </button>
-      </div>
-    )}
+  
   </div>
 );
 

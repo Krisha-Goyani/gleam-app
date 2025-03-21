@@ -19,27 +19,63 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
     hasParking: false,
   });
 
-  const handleDeleteService = () => {
-    // Implement delete functionality
-    console.log("Delete service");
+  // Define the state types
+  const [regularCleaningItems, setRegularCleaningItems] = useState<{
+    name: string;
+    rating: number;
+    image: string;
+    rooms: { name: string; icon: string; }[];
+    items: { label: string; price: number; quantity: number; }[];
+  } | null>({
+    name: "Regular House Cleaning",
+    rating: 4.0,
+    image: "/Image/cart-img.png",
+    rooms: [
+      { name: "1 bdr", icon: "/Image/bed.png" },
+      { name: "1 bth", icon: "/Image/bath.png" },
+      { name: "1 ktchn", icon: "/Image/kitchen.png" },
+    ],
+    items: [
+      { label: "Bathroom", price: 10.0, quantity: 1.5 },
+      { label: "Bedroom", price: 10.0, quantity: 1 },
+    ],
+  });
+
+  const [moveInOutItems, setMoveInOutItems] = useState<{
+    name: string;
+    rating: number;
+    image: string;
+    rooms: { name: string; icon: string; }[];
+    items: { label: string; price: number; quantity: number; }[];
+  } | null>({
+    name: "Move In Move Out",
+    rating: 4.0,
+    image: "/Image/cart-img-1.png",
+    rooms: [
+      { name: "1 bdr", icon: "/Image/bed.png" },
+      { name: "1 bth", icon: "/Image/bath.png" },
+      { name: "1 ktchn", icon: "/Image/kitchen.png" },
+    ],
+    items: [
+      { label: "Bathroom", price: 10.0, quantity: 1.5 },
+      { label: "Bedroom", price: 10.0, quantity: 1 },
+      { label: "Clean Fridge Inside", price: 10.0, quantity: 1 },
+      { label: "Clean Fridge Oven", price: 10.0, quantity: 1 },
+    ],
+  });
+
+  // Delete handlers
+  const handleDeleteRegularCleaning = () => {
+    setRegularCleaningItems(null);
   };
 
-  // First, add this state at the top of the CartMenu component, after the additionalInfo state
-  // Replace the single cartItems state with two separate states
-  const [regularCleaningItems, setRegularCleaningItems] = useState([
-    { label: "Bathroom", price: 10.0, quantity: 1.5 },
-    { label: "Bedroom", price: 10.0, quantity: 1 },
-  ]);
-  
-  const [moveInOutItems, setMoveInOutItems] = useState([
-    { label: "Bathroom", price: 10.0, quantity: 1.5 },
-    { label: "Bedroom", price: 10.0, quantity: 1 },
-    { label: "Clean Fridge Inside", price: 10.0, quantity: 1 },
-    { label: "Clean Fridge Oven", price: 10.0, quantity: 1 },
-  ]);
+  const handleDeleteMoveInOut = () => {
+    setMoveInOutItems(null);
+  };
 
   if (!isOpen) return null;
 
+  // Remove the standalone ServiceItem components and keep only the ones in the return statement
   return (
     <div className="fixed inset-0 z-50">
       <div
@@ -51,12 +87,23 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
           {/* Fixed Header */}
           <div className="sticky top-0 bg-white z-10 px-2 xs-md:px-5 border-b border-gray-200">
             <div className="relative">
-              <button 
+              <button
                 className="absolute right-[20.5rem] xs-md:right-[25rem] md:right-[40rem] top-4 w-5 h-5 xs-md:w-8 xs-md:h-8 rounded-full bg-white shadow-md flex items-center justify-center cursor-pointer hover:bg-gray-50"
                 onClick={onClose}
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13 1L1 13M1 1L13 13" stroke="#6E7491" strokeWidth="2" strokeLinecap="round"/>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13 1L1 13M1 1L13 13"
+                    stroke="#6E7491"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </button>
               <div className="flex mb-2 items-center p-4">
@@ -70,63 +117,79 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
           {/* Scrollable Content */}
           <div className="flex-1 overflow-y-auto pt-4">
             <div className="px-2 xs-md:px-5 border-b-8 border-gray-light-secondary">
+            {regularCleaningItems && (
               <ServiceItem
-                name="Regular House Cleaning"
-                rating={4.0}
-                image="/Image/cart-img.png"
-                rooms={[
-                  { name: "1 bdr", icon: "/Image/bed.png" },
-                  { name: "1 bth", icon: "/Image/bath.png" },
-                  { name: "1 ktchn", icon: "/Image/kitchen.png" },
-                ]}
-                onDelete={handleDeleteService}
+                name={regularCleaningItems.name}
+                rating={regularCleaningItems.rating}
+                image={regularCleaningItems.image}
+                rooms={regularCleaningItems.rooms}
+                items={regularCleaningItems.items}
+                onDelete={handleDeleteRegularCleaning}
                 onClose={onClose}
-                onQuantityChange={(index, value) => {
-                  setRegularCleaningItems(prevItems => {
-                    const newItems = [...prevItems];
-                    newItems[index] = {
-                      ...newItems[index],
-                      quantity: value
+                onItemDelete={(index) => {
+                  setRegularCleaningItems((prev) => {
+                    if (!prev) return null;
+                    const newItems = [...prev.items];
+                    newItems.splice(index, 1);
+                    return {
+                      ...prev,
+                      items: newItems
                     };
-                    return newItems;
                   });
                 }}
-                // Update the items prop to use cartItems:
-                items={regularCleaningItems}
+                onQuantityChange={(index, value) => {
+                  setRegularCleaningItems((prev) => prev && ({
+                    ...prev,
+                    items: prev.items.map((item, i) =>
+                      i === index ? { ...item, quantity: value } : item
+                    ),
+                  }));
+                }}
               />
-
+            )}
+              <div className="mt-3 bg-purple-light p-3 rounded-lg mb-5">
+                <h4 className="font-semibold mb-2">
+                  Clean Regularly, Save More
+                </h4>
+                <p className="text-sm text-gray-600 mb-3">
+                  Subscribe for regular cleanings and keep your home spotless.
+                  Enjoy automatic bookings and save time and money
+                </p>
+                <button className="bg-purple-primary h-10 w-56 text-white px-4 py-2 rounded-md text-sm">
+                  Subscribe and save more
+                </button>
+              </div>
+              {moveInOutItems && (
               <ServiceItem
-                name="Move In Move Out"
-                rating={4.0}
-                image="/Image/cart-img-1.png"
-                rooms={[
-                  { name: "1 bdr", icon: "/Image/bed.png" },
-                  { name: "1 bth", icon: "/Image/bath.png" },
-                  { name: "1 ktchn", icon: "/Image/kitchen.png" },
-                ]}
-                // items={[
-                //   { label: "Bathroom", price: 10.0 },
-                //   { label: "Bedroom", price: 10.0 },
-                //   { label: "Clean Fridge Inside", price: 10.0 },
-                //   { label: "Clean Fridge Oven", price: 10.0 },
-                // ]}
-                onDelete={handleDeleteService}
+                name={moveInOutItems.name}
+                rating={moveInOutItems.rating}
+                image={moveInOutItems.image}
+                rooms={moveInOutItems.rooms}
+                items={moveInOutItems.items}
+                onDelete={handleDeleteMoveInOut}
                 onClose={onClose}
                 isSticky={true}
-                // Replace the empty onQuantityChange handler with this:
-                onQuantityChange={(index, value) => {
-                  setMoveInOutItems(prevItems => {
-                    const newItems = [...prevItems];
-                    newItems[index] = {
-                      ...newItems[index],
-                      quantity: value
+                onItemDelete={(index) => {
+                  setMoveInOutItems((prev) => {
+                    if (!prev) return null;
+                    const newItems = [...prev.items];
+                    newItems.splice(index, 1);
+                    return {
+                      ...prev,
+                      items: newItems
                     };
-                    return newItems;
                   });
                 }}
-                // Update the items prop to use cartItems:
-                items={moveInOutItems}
+                onQuantityChange={(index, value) => {
+                  setMoveInOutItems((prev) => prev && ({
+                    ...prev,
+                    items: prev.items.map((item, i) =>
+                      i === index ? { ...item, quantity: value } : item
+                    ),
+                  }));
+                }}
               />
+            )}
             </div>
 
             <AdditionalInfo
