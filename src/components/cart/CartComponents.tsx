@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Dropdown from "../Dropdown";
 
@@ -152,8 +152,8 @@ export const AdditionalInfo = ({ items }: { items: InfoItem[] }) => (
               onClick={() => item.onChange(!item.value)}
             >
               <div
-                className={`absolute top-1 w-5 h-4 bg-blue-light-secondary rounded-full transition-transform ${
-                  item.value ? "translate-x-7" : "translate-x-1"
+                className={`absolute top-1 w-5 h-4  rounded-full transition-transform ${
+                  item.value ? "bg-white translate-x-6" : "bg-blue-light-secondary translate-x-1"
                 }`}
               />
             </button>
@@ -188,16 +188,75 @@ export const PriceDetails = ({ subTotal, visitFee }: PriceDetailsProps) => (
   </div>
 );
 
-export const UploadImages = () => (
-  <div className="px-5 pt-1 pb-8 border-b-8 border-gray-light-secondary">
-    <h3 className="font-circular-std text-black-secondary text-base mb-3">
-      Upload Images
-    </h3>
-    <div className="w-28 h-28 border border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer">
-      <span className="text-4xl text-gray-400">+</span>
+// Add this interface near the top of the file with other interfaces
+export interface UploadedImage {
+  url: string;
+  file: File;
+}
+
+// Update the UploadImages component
+export const UploadImages = () => {
+  const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files[0]) {
+      const file = files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setUploadedImages([...uploadedImages, { url: imageUrl, file }]);
+    }
+  };
+
+  const handleDeleteImage = (index: number) => {
+    const newImages = uploadedImages.filter((_, i) => i !== index);
+    setUploadedImages(newImages);
+  };
+
+  return (
+    <div className="px-5 pt-1 pb-8 border-b-8 border-gray-light-secondary">
+      <h3 className="font-circular-std text-black-secondary text-base mb-3">
+        Upload Images
+      </h3>
+      <div className="flex flex-wrap gap-4">      
+        <div
+          onClick={() => fileInputRef.current?.click()}
+          className="w-28 h-28 border border-dashed border-gray-secondary rounded-lg flex items-center justify-center cursor-pointer hover:border-gray-400 transition-colors"
+        >
+          <span className="text-4xl text-gray-400">+</span>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageSelect}
+          />
+        </div>
+        {uploadedImages.map((image, index) => (
+          <div key={index} className="relative w-28 h-28 border border-black-light-secondary">
+            <Image
+              src={image.url}
+              alt="Uploaded image"
+              fill
+              className="object-cover rounded-lg"
+            />
+            <button
+              onClick={() => handleDeleteImage(index)}
+              className="absolute top-[3px] right-[3px] bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50"
+            >
+              <Image
+                src="https://gleamurcasa.gumlet.io/round_delete_bfa2e29df1_af60614cdb.svg"
+                alt="Delete"
+                width={15}
+                height={15}
+              />
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const PromoCode = () => (
   <div className="px-2 xs-md:px-5  pt-5 pb-8 border-b-8 border-gray-light-secondary">

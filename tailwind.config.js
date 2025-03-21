@@ -48,9 +48,10 @@ module.exports = {
         'gray-tertary': '#D2CFE1',
         'gray-light-tertary': '#373A3654',
         // black
-        'black-secondary': '#373A36',
         'black-primary': '#262626',
+        'black-secondary': '#373A36',
         'black-light': '#1D1D1D',
+        'black-light-secondary': '#777',
         'white-primary': '#FFF2F5',
         // blue
         'blue-primary': '#517EE5',
