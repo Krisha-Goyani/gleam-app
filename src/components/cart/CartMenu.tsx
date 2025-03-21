@@ -24,6 +24,20 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
     console.log("Delete service");
   };
 
+  // First, add this state at the top of the CartMenu component, after the additionalInfo state
+  // Replace the single cartItems state with two separate states
+  const [regularCleaningItems, setRegularCleaningItems] = useState([
+    { label: "Bathroom", price: 10.0, quantity: 1.5 },
+    { label: "Bedroom", price: 10.0, quantity: 1 },
+  ]);
+  
+  const [moveInOutItems, setMoveInOutItems] = useState([
+    { label: "Bathroom", price: 10.0, quantity: 1.5 },
+    { label: "Bedroom", price: 10.0, quantity: 1 },
+    { label: "Clean Fridge Inside", price: 10.0, quantity: 1 },
+    { label: "Clean Fridge Oven", price: 10.0, quantity: 1 },
+  ]);
+
   if (!isOpen) return null;
 
   return (
@@ -32,8 +46,6 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
         onClick={onClose}
       />
-
-
       <div className="fixed right-0 top-0 h-full w-full xs:max-w-[330px] xs-md:max-w-[400px] md:max-w-[606px] bg-white shadow-xl transform transition-transform">
         <div className="flex flex-col h-full">
           {/* Fixed Header */}
@@ -67,13 +79,20 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
                   { name: "1 bth", icon: "/Image/bath.png" },
                   { name: "1 ktchn", icon: "/Image/kitchen.png" },
                 ]}
-                items={[
-                  { label: "Bathroom", quantity: 1.5, price: 10.0 },
-                  { label: "Bedroom", quantity: 1, price: 10.0 },
-                ]}
                 onDelete={handleDeleteService}
                 onClose={onClose}
-                isSticky={true}
+                onQuantityChange={(index, value) => {
+                  setRegularCleaningItems(prevItems => {
+                    const newItems = [...prevItems];
+                    newItems[index] = {
+                      ...newItems[index],
+                      quantity: value
+                    };
+                    return newItems;
+                  });
+                }}
+                // Update the items prop to use cartItems:
+                items={regularCleaningItems}
               />
 
               <ServiceItem
@@ -85,15 +104,28 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
                   { name: "1 bth", icon: "/Image/bath.png" },
                   { name: "1 ktchn", icon: "/Image/kitchen.png" },
                 ]}
-                items={[
-                  { label: "Bathroom", quantity: 1.5, price: 10.0 },
-                  { label: "Bedroom", quantity: 1, price: 10.0 },
-                  { label: "Clean Fridge Inside", quantity: 1, price: 10.0 },
-                  { label: "Clean Fridge Oven", quantity: 1, price: 10.0 },
-                ]}
+                // items={[
+                //   { label: "Bathroom", price: 10.0 },
+                //   { label: "Bedroom", price: 10.0 },
+                //   { label: "Clean Fridge Inside", price: 10.0 },
+                //   { label: "Clean Fridge Oven", price: 10.0 },
+                // ]}
                 onDelete={handleDeleteService}
                 onClose={onClose}
                 isSticky={true}
+                // Replace the empty onQuantityChange handler with this:
+                onQuantityChange={(index, value) => {
+                  setMoveInOutItems(prevItems => {
+                    const newItems = [...prevItems];
+                    newItems[index] = {
+                      ...newItems[index],
+                      quantity: value
+                    };
+                    return newItems;
+                  });
+                }}
+                // Update the items prop to use cartItems:
+                items={moveInOutItems}
               />
             </div>
 

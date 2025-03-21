@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Dropdown from "../Dropdown";
 
 // Component Interfaces
 export interface ServiceItemProps {
@@ -9,11 +10,11 @@ export interface ServiceItemProps {
     name: string;
     icon: string;
   }[];
-  items: {
-    label: string;
-    quantity: number;
-    price: number;
-  }[];
+  // items: {
+  //   label: string;
+  //   // quantity: number;
+  //   price: number;
+  // }[];
   onDelete: () => void;
   isSticky?: boolean;
 }
@@ -46,6 +47,7 @@ export interface ServiceItemProps {
   }[];
   onDelete: () => void;
   onClose: () => void;
+  onQuantityChange: (index: number, value: number) => void;
   isSticky?: boolean;
 }
 
@@ -57,6 +59,7 @@ export const ServiceItem = ({
   rooms,
   items,
   onDelete,
+  onQuantityChange,
 }: ServiceItemProps) => (
   <div className="relative">
     <div className="relative">
@@ -125,14 +128,10 @@ export const ServiceItem = ({
             {item.label}
           </span>
           <div className="flex items-center gap-3">
-            <select
-              className="bg-green-light text-black-primary font-circular-std border border-green-primary rounded-lg px-2 py-1 text-sm min-w-11 xs-md:min-w-20"
-              value={item.quantity}
-            >
-              <option value="1">1</option>
-              <option value="1.5">1.5</option>
-              <option value="2">2</option>
-            </select>
+            <Dropdown 
+              quantity={item.quantity } 
+              onQuantityChange={(value) => onQuantityChange(index, value)} 
+            />
             <span className="text-black-light text-base font-circular-std min-w-[80px] text-right">
               € {item.price.toFixed(2)}
             </span>
