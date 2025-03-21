@@ -459,7 +459,7 @@ const CleaningService: React.FC = () => {
             {/* Add to Cart Button */}
             <div className="mt-3">
               <button
-                className="bg-green-primary text-white py-3 rounded-lg font-circular-std hover:bg-green-600 transition-colors w-full md-lg:w-[400px] lg-sm:w-[477px]"
+                className="bg-green-primary text-white py-3 rounded-lg font-circular-std hover:bg-green-secondary transition-colors w-full md-lg:w-[400px] lg-sm:w-[477px]"
                 onClick={handleCartToggle}
               >
                 Add to cart

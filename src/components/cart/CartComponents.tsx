@@ -45,37 +45,31 @@ export interface ServiceItemProps {
     price: number;
   }[];
   onDelete: () => void;
+  onClose: () => void;
+  isSticky?: boolean;
 }
 
-// Update the ServiceItem component's rooms rendering
-// Update the ServiceItem component
+// In the ServiceItem component, use onClose for the close button
 export const ServiceItem = ({
   name,
   image,
   rating,
   rooms,
   items,
-  isSticky = false,
   onDelete,
 }: ServiceItemProps) => (
   <div className="relative">
-    <div
-      className={`${
-        isSticky
-          ? "fixed top-0 left-0 right-0 bg-white z-10 px-2 xs-md:px-5 max-w-[606px]"
-          : ""
-      }`}
-    >
-      {isSticky && (
-        <div className="flex mb-2 items-center justify-between p-4">
-          <h2 className="text-xl font-circular-std text-gray-light-primary">
-            Cart
-          </h2>
-        </div>
-      )}
+    <div className="relative">
       <div className="flex justify-between mb-3">
         <div className="flex gap-4">
-          <Image src={image} title="cart-img" alt={name} width={100} height={50} className="w-20 md:w-32 h-20" />
+          <Image
+            src={image}
+            title="cart-img"
+            alt={name}
+            width={100}
+            height={50}
+            className="w-20 md:w-32 h-20"
+          />
           <div className="flex flex-col w-[300px] md:w-[470px]">
             <div className="flex justify-between w-full">
               <h3 className="font-circular-std font-bold text-lg mb-1 text-gray-light-primary">
@@ -120,8 +114,7 @@ export const ServiceItem = ({
       </div>
       <div className="h-px bg-gray-light-secondary mb-4"></div>
     </div>
-    {isSticky && <div className="h-[160px]" />} {/* Add spacing when fixed */}
-    
+
     <div className="pb-4">
       {items.map((item, index) => (
         <div
@@ -250,18 +243,14 @@ export const PromoCode = () => (
         width={20}
         height={20}
       />
-      <input
-        type="text"
-        placeholder="Select Coupon"
-        className="flex-1 outline-none text-gray-600"
-      />
+      <span className="font-circular-std">Select Coupon</span>
       <Image
         src="/Image/arrow-right.png"
         title="apply"
         alt="Apply"
         width={16}
         height={16}
-        className="cursor-pointer"
+        className="cursor-pointer ml-auto"
       />
     </div>
   </div>
