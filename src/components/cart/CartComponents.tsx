@@ -90,7 +90,7 @@ export const ServiceItem = ({
                 ))}
               </div>
               <div className="flex flex-col">
-                <span className="text-base">€ 40.00</span>
+                <span className="text-base font-circular-std">€ 40.00</span>
               </div>
             </div>
           </div>

@@ -3,35 +3,28 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/types/types";
 
-interface HeaderIconProps {
-  src: string;
+export const HeaderIcon = ({ 
+  src, 
+  alt,
+  onClick 
+}: { 
+  src: string; 
   alt: string;
   onClick?: () => void;
-}
-
-interface NavLinkProps {
-  href: string;
-  children: React.ReactNode;
-}
-
-export const HeaderIcon: React.FC<HeaderIconProps> = ({
-  src,
-  alt,  
-  onClick,
-}: HeaderIconProps) => {
-  return (
-    <button onClick={onClick} className="relative inline-block">
-      <Image
-        src={src}
-        title="header-icon"
-        alt={alt}
-        width={24}
-        height={24}
-        className="w-6 h-6"
-      />
-    </button>
-  );
-};
+}) => (
+  <div 
+    className="cursor-pointer" 
+    onClick={onClick}
+  >
+    <Image
+      src={src}
+      alt={alt}
+      width={24}
+      height={24}
+      className="w-6 h-6"
+    />
+  </div>
+);
 
 export const LocationSelector: React.FC = () => {
   const location = useSelector((state: RootState) => state.user.location);
@@ -58,6 +51,12 @@ export const LocationSelector: React.FC = () => {
     </button>
   );
 };
+
+// Add this interface before the NavLink component
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+}
 
 export const NavLink: React.FC<NavLinkProps> = ({
   href,

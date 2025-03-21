@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../Button";
 import {
   ServiceItem,
   AdditionalInfo,
@@ -88,12 +89,12 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
           <div className="sticky top-0 bg-white z-10 px-2 xs-md:px-5 border-b border-gray-200">
             <div className="relative">
               <button
-                className="absolute right-[20.5rem] xs-md:right-[25rem] md:right-[40rem] top-4 w-5 h-5 xs-md:w-8 xs-md:h-8 rounded-full bg-white shadow-md flex items-center justify-center cursor-pointer hover:bg-gray-50"
+                className="absolute right-[20.5rem] xs-md:right-[25rem] md:right-[40rem] top-4 w-4 h-4 xs-md:w-8 xs-md:h-8 rounded-full bg-white shadow-md flex items-center justify-center cursor-pointer hover:bg-gray-50"
                 onClick={onClose}
               >
                 <svg
-                  width="14"
-                  height="14"
+                  width="8"
+                  height="8"
                   viewBox="0 0 14 14"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -101,13 +102,13 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
                   <path
                     d="M13 1L1 13M1 1L13 13"
                     stroke="#6E7491"
-                    strokeWidth="2"
+                    strokeWidth="4"
                     strokeLinecap="round"
                   />
                 </svg>
               </button>
               <div className="flex mb-2 items-center p-4">
-                <h2 className="text-xl font-circular-std text-gray-light-primary">
+                <h2 className="text-xl font-circular-std text-black-light">
                   Cart
                 </h2>
               </div>
@@ -115,7 +116,7 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto pt-4">
+          <div className="flex-1 overflow-y-auto pt-5">
             <div className="px-2 xs-md:px-5 border-b-8 border-gray-light-secondary">
             {regularCleaningItems && (
               <ServiceItem
@@ -147,17 +148,18 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
                 }}
               />
             )}
-              <div className="mt-3 bg-purple-light p-3 rounded-lg mb-5">
+              <div className="mt-1 bg-purple-light p-3 rounded-lg mb-5">
                 <h4 className="font-semibold mb-2">
                   Clean Regularly, Save More
                 </h4>
-                <p className="text-sm text-gray-600 mb-3">
+                <p className="text-sm text-black-light mb-3 font-circular-std">
                   Subscribe for regular cleanings and keep your home spotless.
                   Enjoy automatic bookings and save time and money
                 </p>
-                <button className="bg-purple-primary h-10 w-56 text-white px-4 py-2 rounded-md text-sm">
-                  Subscribe and save more
-                </button>
+                <Button 
+                text="Subscribe and save more"
+                className="bg-purple-primary font-circular-std h-10 w-56 text-white px-4 py-2 rounded-md text-sm"
+              />
               </div>
               {moveInOutItems && (
               <ServiceItem
@@ -234,13 +236,14 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
                 <span className="text-xl text-black-secondary font-circular-std">
                   € 225.00
                 </span>
-                <span className="text-base text-black-secondary">
+                <span className="text-base text-black-secondary font-circular-std">
                   Amount to pay
                 </span>
               </div>
-              <button className="w-52 md:w-80 h-14 bg-green-primary text-white md:py-4 md:px-11 rounded-lg font-circular-std hover:bg-green-secondary transition-colors">
-                Confirm & Add Address
-              </button>
+              <Button 
+                text="Confirm & Add Address"
+                className="w-52 md:w-80 h-14 bg-green-primary text-white md:py-4 md:px-11 rounded-lg font-circular-std hover:bg-green-secondary transition-colors"
+              />
             </div>
           </div>
         </div>

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 // import { useSelector } from "react-redux";
 // import type { RootState } from "@/types/types";
 import { HeaderIcon, LocationSelector, NavLink } from "./HeaderComponents";
-// import CartMenu from '@/components/cart/CartMenu';
+import CartMenu from '@/components/cart/CartMenu';
 
 const Header = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <header className="hidden md-lg:block border-b border-gray-200">
       <div className="container-main">
@@ -37,7 +39,11 @@ const Header = () => {
               <HeaderIcon src="/Image/search.png" alt="Search" />
               <HeaderIcon src="/Image/heart.png" alt="Favorites" />
               <HeaderIcon src="/Image/notification.png" alt="Notifications" />
-              <HeaderIcon src="/Image/cart.png" alt="Cart" />
+              <HeaderIcon 
+                src="/Image/cart.png" 
+                alt="Cart" 
+                onClick={() => setIsCartOpen(true)}
+              /> 
               <HeaderIcon src="/Image/profile.png" alt="Notifications" />
             </div>
           </div>
@@ -53,6 +59,10 @@ const Header = () => {
           </nav>
         </div>
       </div>
+      <CartMenu 
+        isOpen={isCartOpen} 
+        onClose={() => setIsCartOpen(false)} 
+      />
     </header>
   );
 };
