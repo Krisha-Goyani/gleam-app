@@ -305,7 +305,7 @@ const CleaningService: React.FC = () => {
       <div className="md-lg:px-16 md-lg:py-8 container-main">
         <div className="md-lg:flex space-between gap-10 max-w-[1310px] w-full">
           {/* Left side - Images */}
-          <div className="md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px]">
+          <div className="md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px] md-lg:sticky md-lg:top-4 md-lg:self-start">
             <div className="relative md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px] h-[233px] sm:h-[270px] md:h-[300px] md-lg:h-[394px]">
               {/* Header overlay */}
               <div className="md-lg:hidden absolute top-0 left-0 right-0 z-10 p-4 flex justify-between items-center bg-gradient-to-b from-black/30 to-transparent">
