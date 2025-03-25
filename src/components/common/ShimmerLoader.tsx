@@ -1,4 +1,19 @@
-const ShimmerLoader = () => {
+const ShimmerLoader = ({ variant = 'default' }) => {
+  if (variant === 'button') {
+    return (
+      <>      
+      <div className="grid  gap-4 w-full">      
+      <div className="py-3 px-4 rounded-lg border border-gray-light-secondary animate-pulse bg-gray-200 w-full h-11 md-lg:h-14">
+        <div className="h-full w-full bg-gray-300  rounded"></div>
+      </div>
+      </div>
+      <div className="py-3 px-4 rounded-lg border border-gray-light-secondary animate-pulse bg-gray-200  w-full h-11 md-lg:h-14">
+        <div className="h-full w-full bg-gray-300  rounded"></div>
+      </div>
+      </>
+    );
+  }
+
   return (
     <div className="animate-pulse space-y-4 pt-6">
       <div className="flex justify-between items-start mb-5">

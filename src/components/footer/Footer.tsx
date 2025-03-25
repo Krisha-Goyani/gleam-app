@@ -12,8 +12,8 @@ import Button from "../Button";
 const Footer = () => {
   const [emailAddress, setEmailAddress] = useState("");
   // Add state for section toggles
-  const [isAboutUsOpen, setIsAboutUsOpen] = useState(true);
-  const [isNeedHelpOpen, setIsNeedHelpOpen] = useState(true);
+  const [isAboutUsOpen, setIsAboutUsOpen] = useState(false);
+  const [isNeedHelpOpen, setIsNeedHelpOpen] = useState(false);
 
   // Define data arrays
   const aboutUsLinks = [
@@ -222,7 +222,7 @@ const Footer = () => {
           </div>
 
           {/* Payment Methods */}
-          <div className="flex gap-2">
+          <div className="flex justify-between md:justify-start md:gap-3">
             {paymentIcons.map((icon, index) => (
               <PaymentIcon key={index} src={icon.src} alt={icon.alt} />
             ))}

@@ -30,7 +30,10 @@ const UserReviews = () => {
     dispatch({ type: "reviews/showLessReviews" });
   };
 
-  const locations = [
+  const [isLocationsExpanded, setIsLocationsExpanded] = useState(false);
+  const [isLocationsLoading, setIsLocationsLoading] = useState(false);
+
+  const initialLocations = [
     "Kirkland",
     "Seattle",
     "Bellevue",
@@ -38,12 +41,36 @@ const UserReviews = () => {
     "Tacoma",
     "Everett",
     "Spokane",
-    {
-      text: "Show More",
-      icon: "/Image/arrow-down.png",
-      isSpecial: true
-    }
   ];
+
+  const additionalLocations = [
+    "Kirkland",
+    "Seattle",
+    "Bellevue",
+    "Redmond",
+  ];
+
+  const handleShowMoreLocations = async () => {
+    setIsLocationsLoading(true);
+    // Simulate loading time
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsLocationsExpanded(true);
+    setIsLocationsLoading(false);
+  };
+
+  const locations = [
+    ...initialLocations,
+    ...(isLocationsExpanded ? additionalLocations : []),
+    {
+      text: isLocationsExpanded ? "Show Less" : "Show More",
+      // Make sure this path matches your actual image location
+      icon: isLocationsExpanded ? '/Image/arrow-up.png' : '/Image/arrow-down.png',
+      isSpecial: true,
+      onClick: isLocationsExpanded ? 
+        () => setIsLocationsExpanded(false) : 
+        handleShowMoreLocations
+    }
+  ].filter(Boolean);
 
   return (
     <div className="bg-white pt-12">
@@ -77,10 +104,10 @@ const UserReviews = () => {
         )}
       </div>
 
-      <h2 className="md-lg:hidden text-lg font-medium text-black-secondary mb-4 font-circular-std">
+      <h2 className=" text-lg font-medium text-black-secondary mb-4 font-circular-std">
         Best cleaning services in and around Washington
       </h2>
-      <div className="md-lg:hidden grid grid-cols-2 gap-4 mb-6 font-circular-std">
+      <div className=" grid grid-cols-2 md-lg:grid-cols-3 gap-4 mb-6 font-circular-std">
         {locations.map((location, index) => (
           <Button
             key={typeof location === 'string' ? location : index}
@@ -103,9 +130,11 @@ const UserReviews = () => {
                 </div>
               )
             }
+            onClick={typeof location === 'object' ? location.onClick : undefined}
             className="py-3 px-4 rounded-lg border border-gray-light-secondary text-black-secondary font-medium hover:bg-gray-50"
           />
         ))}
+        {isLocationsLoading && <ShimmerLoader variant="button" />}
       </div>
     </div>
   );

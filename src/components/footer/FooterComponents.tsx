@@ -45,7 +45,7 @@ export const PaymentIcon: React.FC<PaymentIconProps> = ({ src, alt }) => (
     title={alt}
     width={56}
     height={35}
-    className="h-8 border border-white-primary rounded-md"
+    className="h-8 w-14 xs-md:w-16 border border-white-primary rounded-md"
   />
 );
 
