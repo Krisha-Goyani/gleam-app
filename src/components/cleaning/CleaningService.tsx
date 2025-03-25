@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useCallback, memo, useRef } from "react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, CleaningExtra } from "@/types/redux";
@@ -221,36 +221,78 @@ const ThumbnailGallery = memo(
     images: string[];
     onSelect: (index: number) => void;
     selectedIndex: number;
-  }) => (
-    <div
-      className="hidden md-lg:block mt-4 w-full overflow-x-auto scrollbar-hide"
-      style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
-    >
-      <div className="flex gap-4 min-w-max">
-        {images.map((image, index) => (
-          <button
-            key={index}
-            className={`shrink-0 relative w-[140px] h-[87px] border-2  overflow-hidden transition-all duration-300 ${
-              selectedIndex === index
-                ? "border-blue-primary"
-                : "border-transparent hover:border-blue-primary/50"
-            }`}
-            onClick={() => onSelect(index)}
-          >
-            <Image
-              src={image}
-              alt={`Thumbnail ${index + 1}`}
-              title="cleaning-img"
-              fill
-              className={`object-cover transition-all duration-300 ${
-                selectedIndex !== index ? "brightness-75" : ""
+  }) => {
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const sliderRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+      setIsDragging(true);
+      if (sliderRef.current) {
+        setStartX(e.pageX - sliderRef.current.offsetLeft);
+        setScrollLeft(sliderRef.current.scrollLeft);
+      }
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      if (sliderRef.current) {
+        const x = e.pageX - sliderRef.current.offsetLeft;
+        const walk = (x - startX);
+        sliderRef.current.scrollLeft = scrollLeft - walk;
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    const handleClick = (e: React.MouseEvent, index: number) => {
+      if (isDragging) {
+        e.preventDefault();
+        return;
+      }
+      onSelect(index);
+    };
+
+    return (
+      <div
+        ref={sliderRef}
+        className="hidden md-lg:block mt-4 w-full overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+      >
+        <div className="flex gap-4 min-w-max">
+          {images.map((image, index) => (
+            <button
+              key={index}
+              className={`shrink-0 relative w-[140px] h-[87px] border-2 overflow-hidden transition-all duration-300 cursor-grab active:cursor-grabbing ${
+                selectedIndex === index
+                  ? "border-blue-primary"
+                  : "border-transparent hover:border-blue-primary/50"
               }`}
-            />
-          </button>
-        ))}
+              onClick={(e) => handleClick(e, index)}
+            >
+              <Image
+                src={image}
+                alt={`Thumbnail ${index + 1}`}
+                title="cleaning-img"
+                fill
+                className={`object-cover transition-all duration-300 pointer-events-none ${
+                  selectedIndex !== index ? "brightness-75" : ""
+                }`}
+                draggable={false}
+              />
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
-  )
+    );
+  }
 );
 ThumbnailGallery.displayName = "ThumbnailGallery";
 
@@ -306,7 +348,7 @@ const CleaningService: React.FC = () => {
         <div className="md-lg:flex space-between gap-10 max-w-[1310px] w-full">
           {/* Left side - Images */}
           <div className="md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px] md-lg:sticky md-lg:top-4 md-lg:self-start">
-            <div className="relative md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px] h-[233px] sm:h-[270px] md:h-[300px] md-lg:h-[394px]">
+            <div className="relative md-lg:max-w-[450px] lg-sm:max-w-[500px] xl:max-w-[635px] h-[233px] sm:h-[270px] md:h-[300px] md-lg:h-[394px] draggable">
               {/* Header overlay */}
               <div className="md-lg:hidden absolute top-0 left-0 right-0 z-10 p-4 flex justify-between items-center bg-gradient-to-b from-black/30 to-transparent">
                 <ActionButton icon="/Image/arrow-square-left.png" />
